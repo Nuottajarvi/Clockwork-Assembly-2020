@@ -149,12 +149,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="graphicsController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="objReader.cpp" />
     <ClCompile Include="scene1.cpp" />
     <ClCompile Include="scene2.cpp" />
+    <ClCompile Include="scene3.cpp" />
     <ClCompile Include="shaderReader.cpp" />
+    <ClCompile Include="camera.h" />
+    <ClCompile Include="structs.cpp" />
     <ClCompile Include="textureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,11 +170,15 @@
     <None Include="scene1.vert" />
     <None Include="scene2.frag" />
     <None Include="scene2.vert" />
+    <None Include="scene3.frag" />
+    <None Include="scene3.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphicsController.h" />
     <ClInclude Include="objReader.h" />
     <ClInclude Include="scene1.h" />
     <ClInclude Include="scene2.h" />
+    <ClInclude Include="scene3.h" />
     <ClInclude Include="shaderReader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="structs.h" />

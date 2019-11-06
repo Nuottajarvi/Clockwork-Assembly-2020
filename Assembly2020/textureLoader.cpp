@@ -7,7 +7,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-static int texIndex = 0;
+static int texIndex = 2;
 
 GLint loadTexture(std::string fileName, std::string attributeName, GLuint program) {
 
@@ -18,14 +18,12 @@ GLint loadTexture(std::string fileName, std::string attributeName, GLuint progra
 	if (data)
 	{
 		tex = glGetUniformLocation(program, attributeName.c_str());
-		std::cout << "TEX IS " << tex << std::endl;
 		glActiveTexture(GL_TEXTURE0 + texIndex);
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //set its parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
-		std::cout << "ACTIVE TEXTURE " << texIndex << std::endl;
 		texIndex++;
 	}
 	else

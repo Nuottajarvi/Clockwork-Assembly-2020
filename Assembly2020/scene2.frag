@@ -39,11 +39,12 @@ float flakes(vec2 p){
 void main() {
 	vec2 uv = gl_FragCoord.xy / vec2(600.);
 	
-	vec2 texUv = uv - vec2(1., 0.8);
-
 	float t0 = 4.8;
 	float t1 = t0 + 3.;
 	float t2 = t1 + 3.3;
+
+	//title
+	vec2 texUv = uv - vec2(1., 0.8);
 
 	if(iTime < t1 && iTime > t0) {
 		texUv.y = max(texUv.y, -.3);
@@ -65,8 +66,17 @@ void main() {
 	uv -= vec2(.7, .5);
 	if(isBg == 1) {
 		vec3 col = vec3(0.8);
-		col += vec3(flakes(uv))*.05;
-		col -= length(uv) * .3;
+		
+		//after 12s pullup
+		vec2 fuv = uv;
+		vec2 bguv = uv;
+		float t0 = 14.;
+		if(iTime > t0) {
+			fuv.y += (iTime - t0) * .1;
+			bguv.y += (iTime - t0) * .03;
+		}
+		col += vec3(flakes(fuv))*.05;
+		col -= length(bguv) * .3;
 
 		if(iTime > t0 && iTime < t2) {
 			col -= titleCol * .15;

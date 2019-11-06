@@ -21,8 +21,5 @@ void main(void) {
 	//		col += texture2D(fbo_tex, uv + vec2(0., -i*offset)).rgb;
 	//	}
 	//}
-
-	col -= vec3(.3);
-
 	gl_FragColor = vec4(col, 1.);
 }
