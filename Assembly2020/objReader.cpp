@@ -114,9 +114,6 @@ void objReader(std::string filename, VertexArray &vertices, IndiceArray &indices
 				Vec3 v = temp_vertices.at(vertexIndex[i] - 1);
 				Vec2 uv = temp_uvs.at(uvIndex[i] - 1);
 				Vec3 n = temp_normals.at(normalIndex[i] - 1);
-				std::cout << "TAN" << tan << std::endl;
-				std::cout << "BIT" << bitan << std::endl;
-				std::cout << "NOR" << n << std::endl;
 				vertices.push_back({
 					v.x, v.y, v.z,
 					uv.x, 1.f - uv.y,

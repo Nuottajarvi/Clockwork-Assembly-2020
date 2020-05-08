@@ -21,22 +21,22 @@ vec3 normalMap() {
 	
 	vec3 tex = texture(normalTex, uv).rgb;
 
-	mat3 TBN = transpose(mat3(
-		tang,
-		bitan,
-		nor
-	));
-	vec3 N = normalize((tex - vec3(0.5)) * 2.);
+	mat3 TBN = mat3(
+		normalize(tang),
+		normalize(bitan),
+		normalize(-nor)
+	);
+	vec3 N = -normalize((tex - vec3(0.5)) * 2.);
 	return TBN * N;
 }
 
 void main() {
     // Output to screen
 
-	vec3 lightDir = vec3(0., -6., 0.);
+	vec3 lightDir = vec3(0., -8., 8.);
 
 	vec3 n = normalMap();
-	//n = nor;
+	//n = nor
 
 	float diff = max(0., dot(n, lightDir));
 
@@ -44,8 +44,14 @@ void main() {
 
 	vec3 viewDir = normalize(pos);
     vec3 specularDir = reflect(normalize(lightDir), n);
-    float specular = pow(max(dot(viewDir, specularDir), 0.0), 13.);
-	float light = .4 + diff * .1;
+    //float specular = pow(max(dot(viewDir, specularDir), 0.0), 30.);
+	//specular = min(1., specular);
+	//if face not pointing to light
+	if(dot(nor, lightDir) < 0) {
+		diff = 0.;
+		//specular = 0.;
+	}
+	float light = .4 + diff * .1;// + specular * .1;
 	vec3 col =  tex * light;
 
 	FragColor = vec4(col, 1.0);
