@@ -15,6 +15,7 @@
 #include "scene1.h"
 #include "scene2.h"
 #include "scene3.h"
+#include "normalmap.h"
 #include "textureLoader.h"
 
 const Window fullscreen = { 1920, 1080, true };
@@ -61,8 +62,8 @@ void setVertexAttribArray(GLint location, int size, Scene scene, bool reset = fa
 
 int main(void)
 {
-	Window screen = test_screen;
-	//Window window = fullscreen;
+	//Window screen = test_screen;
+	Window screen = fullscreen;
 	GLFWwindow* window = graphics::initWindow(screen, "Automata");
 
 	int sceneId = 0;
@@ -125,11 +126,11 @@ int main(void)
 		float startTime = (float)glfwGetTime();
 
 		float testTime = 0.;
-		float lastTime = 0.;
+		float lastTime = 0.; 
 
 		while (!glfwWindowShouldClose(window)) {
 			float time = (float)glfwGetTime() - startTime + testTime;
-			//std::cout << 1.f / (time - lastTime) << std::endl;
+			std::cout << 1.f / (time - lastTime) << std::endl;
 
 			if (time > scene.length) {
 				break;

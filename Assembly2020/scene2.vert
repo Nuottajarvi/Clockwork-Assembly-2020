@@ -22,13 +22,19 @@ mat3 rotZ(float r) {
 void main()
 {
 	const float t3 = 12.;
-	if(vWorldPos.x > 0.5) {
+	if(/*isPendulum*/vWorldPos.x > 0.5) {
 		isBg = 0;
 		vec3 os = vec3(0., -8., 3.);
 		float swing = sin(iTime - PI / 2.);
 		//swing = -PI / 2.;
 		mat3 rot = rotZ(swing);
 		vec3 pos = rot * vPos - os;
+		gl_Position = MVP * vec4(pos, 1.0);
+	} else if(/*isBase*/vWorldPos.x < -0.5) {
+		isBg = 0;
+		vec3 os = vec3(0., 3., 3.);
+		vec3 pos = vPos * 8. - os;
+		pos.x *= 2.;
 		gl_Position = MVP * vec4(pos, 1.0);
 	} else {
 		isBg = 1;

@@ -70,10 +70,10 @@ void main() {
 		//after 12s pullup
 		vec2 fuv = uv;
 		vec2 bguv = uv;
-		float t0 = 14.;
-		if(iTime > t0) {
-			fuv.y += (iTime - t0) * .1;
-			bguv.y += (iTime - t0) * .03;
+		float flaketime = 14.;
+		if(iTime > flaketime) {
+			fuv.y += (iTime - flaketime) * .2;
+			bguv.y += (iTime - flaketime) * .06;
 		}
 		col += vec3(flakes(fuv))*.05;
 		col -= length(bguv) * .3;
