@@ -2,6 +2,7 @@
 uniform float iTime;
 uniform sampler2D titleTex;
 in vec2 uv;
+in vec3 hitPos;
 flat in int isBg;
 
 const float ar = 1.8;
@@ -70,12 +71,12 @@ void main() {
 		//after 12s pullup
 		vec2 fuv = uv;
 		vec2 bguv = uv;
-		float flaketime = 14.;
+		float flaketime = 13.;
 		if(iTime > flaketime) {
-			fuv.y += (iTime - flaketime) * .2;
-			bguv.y += (iTime - flaketime) * .06;
+			fuv /= 1. - (iTime - flaketime) * .3;
+			bguv /= 1. - (iTime - flaketime) * .05;
 		}
-		col += vec3(flakes(fuv))*.05;
+		col += max(vec3(0.), vec3(flakes(fuv))*.05 - vec3(max(0., (iTime - flaketime) * .03)));
 		col -= length(bguv) * .3;
 
 		if(iTime > t0 && iTime < t2) {

@@ -22,32 +22,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{5CD23F80-8B61-4EE8-8A05-94BC4B47DECF}</ProjectGuid>
     <RootNamespace>Gambler</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -106,13 +106,14 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>SDK Path\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Peetu\Desktop\Koodaus\AutomataDemo\libraries\glfw-3.3.bin.WIN64\include;C:\Users\Peetu\Desktop\Koodaus\AutomataDemo\libraries\glad\include;SDK Path\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalLibraryDirectories>SDK Path\Lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Peetu\Desktop\Koodaus\AutomataDemo\libraries\glfw-3.3.bin.WIN64\lib-vc2019;SDK Path\Lib</AdditionalLibraryDirectories>
+      <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,6 +147,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>winmm.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Peetu\Desktop\Koodaus\AutomataDemo\libraries\glfw-3.3.bin.WIN64\lib-vc2019;SDK Path\Lib</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -153,10 +156,16 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="graphicsController.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="movementScene.cpp" />
     <ClCompile Include="objReader.cpp" />
     <ClCompile Include="scene1.cpp" />
     <ClCompile Include="scene2.cpp" />
+    <ClCompile Include="normalmap.cpp" />
     <ClCompile Include="scene3.cpp" />
+    <ClCompile Include="scene4.cpp" />
+    <ClCompile Include="scene5.cpp" />
+    <ClCompile Include="scene6.cpp" />
+    <ClCompile Include="sceneHelpers.cpp" />
     <ClCompile Include="shaderReader.cpp" />
     <ClCompile Include="camera.h" />
     <ClCompile Include="structs.cpp" />
@@ -164,21 +173,38 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="antialias-post.frag" />
+    <None Include="movementScene.frag" />
+    <None Include="movementScene.vert" />
     <None Include="post.vert" />
     <None Include="post2.frag" />
     <None Include="scene1.frag" />
     <None Include="scene1.vert" />
     <None Include="scene2.frag" />
     <None Include="scene2.vert" />
+    <None Include="normalmap.frag" />
+    <None Include="normalmap.vert" />
     <None Include="scene3.frag" />
     <None Include="scene3.vert" />
+    <None Include="scene4.frag" />
+    <None Include="scene4.vert" />
+    <None Include="scene5.frag" />
+    <None Include="scene5.vert" />
+    <None Include="scene6.frag" />
+    <None Include="scene6.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphicsController.h" />
+    <ClInclude Include="libraries\glfw3.h" />
+    <ClInclude Include="movementScene.h" />
     <ClInclude Include="objReader.h" />
     <ClInclude Include="scene1.h" />
     <ClInclude Include="scene2.h" />
+    <ClInclude Include="normalmap.h" />
     <ClInclude Include="scene3.h" />
+    <ClInclude Include="scene4.h" />
+    <ClInclude Include="scene5.h" />
+    <ClInclude Include="scene6.h" />
+    <ClInclude Include="sceneHelpers.h" />
     <ClInclude Include="shaderReader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="structs.h" />

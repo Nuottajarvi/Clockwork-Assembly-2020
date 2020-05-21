@@ -10,11 +10,12 @@
 TextureArray Scene3::getTextures(GLuint program) {
 	TextureArray textures;
 	textures.push_back(loadTexture("media/metal.png", "metalTex", program));
+	textures.push_back(loadTexture("media/noise.png", "noiseTex", program));
 	return textures;
 }
 
 Scene Scene3::init() {
-	//melting weights
+	//weights
 
 	shaderReader vertexShader = shaderReader("scene3.vert");
 	shaderReader fragmentShader = shaderReader("scene3.frag");
@@ -26,5 +27,5 @@ Scene Scene3::init() {
 	IndiceArray indices;
 	SceneHelpers::createBg(vertices, indices);
 
-	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 8., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
 }

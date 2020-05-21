@@ -6,6 +6,7 @@ in vec3 vCol;
 in vec3 vPos;
 in vec2 vTex;
 out vec2 uv;
+out vec3 hitPos;
 flat out int isBg;
 
 const float PI = 3.14159;
@@ -24,7 +25,7 @@ void main()
 	const float t3 = 12.;
 	if(/*isPendulum*/vWorldPos.x > 0.5) {
 		isBg = 0;
-		vec3 os = vec3(0., -8., 3.);
+		vec3 os = vec3(0., -8., 5.);
 		float swing = sin(iTime - PI / 2.);
 		//swing = -PI / 2.;
 		mat3 rot = rotZ(swing);
@@ -32,9 +33,10 @@ void main()
 		gl_Position = MVP * vec4(pos, 1.0);
 	} else if(/*isBase*/vWorldPos.x < -0.5) {
 		isBg = 0;
-		vec3 os = vec3(0., 3., 3.);
+		vec3 os = vec3(0., 6., 2.);
 		vec3 pos = vPos * 8. - os;
-		pos.x *= 2.;
+		pos.x *= 1.4;
+		hitPos = pos;
 		gl_Position = MVP * vec4(pos, 1.0);
 	} else {
 		isBg = 1;

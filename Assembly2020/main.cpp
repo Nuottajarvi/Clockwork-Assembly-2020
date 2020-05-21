@@ -15,6 +15,10 @@
 #include "scene1.h"
 #include "scene2.h"
 #include "scene3.h"
+#include "scene4.h"
+#include "scene5.h"
+#include "scene6.h"
+#include "movementScene.h"
 #include "normalmap.h"
 #include "textureLoader.h"
 
@@ -62,12 +66,12 @@ void setVertexAttribArray(GLint location, int size, Scene scene, bool reset = fa
 
 int main(void)
 {
-	//Window screen = test_screen;
-	Window screen = fullscreen;
+	Window screen = test_screen;
+	//Window screen = fullscreen;
 	GLFWwindow* window = graphics::initWindow(screen, "Automata");
 
 	int sceneId = 0;
-	Scene(*scenes[])() = {Scene3::init};
+	Scene(*scenes[])() = {/*Scene2::init, Scene3::init, Scene4::init, Scene5::init, Scene6::init*/ MovementScene::init};
 
 	//ShowCursor(0);
 	//PlaySound("./music.wav", NULL, SND_ASYNC);
@@ -89,6 +93,11 @@ int main(void)
 		const char* fragment_shader_text = scene.fragmentShader.c_str();
 		glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
 		glCompileShader(fragment_shader);
+
+		glCullFace(GL_FRONT);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+
 		GLuint program = glCreateProgram();
 		glAttachShader(program, vertex_shader);
 		glAttachShader(program, fragment_shader);
@@ -117,16 +126,12 @@ int main(void)
 		checkErrors(program);
 		
 		//POST PROCESSING
-		bool hasPost = scene.postFragmentShader != "";
-		graphics::Post post;
-		if (hasPost) {
-			post = graphics::setupPost(screen, scene);
-		}
+		graphics::Post post = graphics::setupPost(screen, scene);
 
 		float startTime = (float)glfwGetTime();
 
 		float testTime = 0.;
-		float lastTime = 0.; 
+		float lastTime = 0.;
 
 		while (!glfwWindowShouldClose(window)) {
 			float time = (float)glfwGetTime() - startTime + testTime;
@@ -141,11 +146,9 @@ int main(void)
 			glfwGetFramebufferSize(window, &width, &height);
 			float ratio = width / (float)height;
 
-			if (hasPost) {
-				glBindFramebuffer(GL_FRAMEBUFFER, post.framebuffer[0]);
-				glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[0]);
-				glViewport(0, 0, width, height);
-			}
+			glBindFramebuffer(GL_FRAMEBUFFER, post.framebuffer[0]);
+			glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[0]);
+			glViewport(0, 0, width, height);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			mat4x4 mvp;
@@ -172,39 +175,38 @@ int main(void)
 
 			glDrawElements(GL_TRIANGLES, scene.indices.size(), GL_UNSIGNED_INT, (void*)0);
 
-			if (hasPost) {
-				glUseProgram(post.program);
+			glUseProgram(post.program);
 
-				glEnableVertexAttribArray(post.v_coord_location);
+			glEnableVertexAttribArray(post.v_coord_location);
 
-				glBindBuffer(GL_ARRAY_BUFFER, post.vbo_fbo_vertices);
-				glVertexAttribPointer(
-					post.v_coord_location,	// attribute
-					2,                  // number of elements per vertex, here (x,y)
-					GL_FLOAT,           // the type of each element
-					GL_FALSE,           // take our values as-is
-					0,                  // no extra data between each position
-					0                   // offset of first element
-				);
+			glBindBuffer(GL_ARRAY_BUFFER, post.vbo_fbo_vertices);
+			glVertexAttribPointer(
+				post.v_coord_location,	// attribute
+				2,                  // number of elements per vertex, here (x,y)
+				GL_FLOAT,           // the type of each element
+				GL_FALSE,           // take our values as-is
+				0,                  // no extra data between each position
+				0                   // offset of first element
+			);
 
-				glUniform1i(post.fbo_texture_location, GL_TEXTURE0);
-				glUniform1f(post.itime_location, time);
+			glUniform1i(post.fbo_texture_location, GL_TEXTURE0);
+			glUniform1f(post.itime_location, time);
 
-				for (int i = 0; i < scene.postRuns; i++) {
-					int pingpong = i % 2;
-					glBindFramebuffer(GL_FRAMEBUFFER, post.framebuffer[(i + 1) % 2]);
-					glActiveTexture(GL_TEXTURE0 + i % 2);
-					glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[i % 2]);
-					glUniform1i(post.pass_location, i);
-					glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
-				}
-
-				glBindFramebuffer(GL_FRAMEBUFFER, 0);
-				glClearColor(0.0, 0.0, 0.0, 1.0);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+			for (int i = 0; i < scene.postRuns; i++) {
+				int pingpong = i % 2;
+				glBindFramebuffer(GL_FRAMEBUFFER, post.framebuffer[(i + 1) % 2]);
+				glActiveTexture(GL_TEXTURE0 + i % 2);
+				glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[i % 2]);
+				glUniform1i(post.pass_location, i);
 				glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
 			}
+
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glClearColor(0.0, 0.0, 0.0, 1.0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}
@@ -218,12 +220,10 @@ int main(void)
 			vertex_buffer, index_buffer, vertex_shader, fragment_shader, program
 		};
 
-		if (hasPost) {
-			GLuint postbuffers[] = {
-				post.fragment_shader, post.vertex_shader, post.program
-			};
-			memcpy(buffers + sizeof(buffers), postbuffers, sizeof(postbuffers));
-		}
+		GLuint postbuffers[] = {
+			post.fragment_shader, post.vertex_shader, post.program
+		};
+		memcpy(buffers + sizeof(buffers), postbuffers, sizeof(postbuffers));
 		glDeleteBuffers(sizeof(buffers) / sizeof(*(buffers)), buffers);
 	}
 	glfwDestroyWindow(window);

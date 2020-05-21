@@ -7,9 +7,10 @@ in float time;
 const float ar = 1.8;
 const float E = 0.001;
 const float start = 0.01;
-const float end = 10.0;
+const float end = 100.0;
 const float PI = 3.14159;
 uniform sampler2D metalTex;
+uniform sampler2D noiseTex;
 
 out vec4 FragColor;
 
@@ -38,7 +39,8 @@ mat3 rotZ(float r) {
 	);
 }
 
-float SDFcylinder(vec3 p) {
+float SDFcylinder(vec3 p, out float y) {
+	y = p.y;
 	return max(length(p.xz) - .3, abs(p.y) - .8);
 }
 
@@ -72,24 +74,34 @@ float SDFchain(vec3 p)
 	return smallest;
 }
 
-float SDFweight(vec3 p) {
+float SDFweight(vec3 p, out float y) {
 	vec3 rotp = rotY(time * .4) * p;
-	return min(SDFchain(rotp.yxz + vec3(.85, 0., 0.)), SDFcylinder(p));
+	return min(SDFchain(rotp.yxz + vec3(.85, 0., 0.)), SDFcylinder(p, y));
 }
 
-float SDF(vec3 p) {
-	vec3 cylinder0pos = vec3(-1., -2. + time * .25, 0.);
-	vec3 cylinder1pos = vec3(1., 2. - time * .25, 0.);
+float SDF(vec3 p, out float y) {
+	vec3 cylinder0pos = vec3(-1., -2. + time * .33, 0.);
+	vec3 cylinder1pos = vec3(1., 2. - time * .33, 0.);
 
-	return min(SDFweight(p - cylinder0pos), SDFweight(p - cylinder1pos));
+	float y0, y1;
+	float weight0 = SDFweight(p - cylinder0pos, y0);
+	float weight1 = SDFweight(p - cylinder1pos, y1);
+
+	if(weight0 < weight1) {
+		y = y0;
+		return weight0;
+	} else {
+		y = y1;
+		return weight1;
+	}
 }
 
-float rayMarch(vec3 eye, vec3 ray) {
+float rayMarch(vec3 eye, vec3 ray, out float y) {
 	float depth = 0.;
 	for(int i = 0; i < 255; i++) {
 		vec3 p = eye + ray * depth;
 
-		float dist = SDF(p);
+		float dist = SDF(p, y);
 
 		if(dist < E) {
 			return depth;
@@ -103,10 +115,11 @@ float rayMarch(vec3 eye, vec3 ray) {
 
 vec3 estimateNormal(vec3 p) {
     float E = 0.1;
+	float y;
     return normalize(vec3(
-        SDF(vec3(p.x + E, p.y, p.z)) - SDF(vec3(p.x - E, p.y, p.z)),
-        SDF(vec3(p.x, p.y + E, p.z)) - SDF(vec3(p.x, p.y - E, p.z)),
-        SDF(vec3(p.x, p.y, p.z + E)) - SDF(vec3(p.x, p.y, p.z - E))
+        SDF(vec3(p.x + E, p.y, p.z), y) - SDF(vec3(p.x - E, p.y, p.z), y),
+        SDF(vec3(p.x, p.y + E, p.z), y) - SDF(vec3(p.x, p.y - E, p.z), y),
+        SDF(vec3(p.x, p.y, p.z + E), y) - SDF(vec3(p.x, p.y, p.z - E), y)
     ));
 }
 
@@ -121,18 +134,37 @@ float wrap(float t) {
 	}
 }
 
+vec3 noise(vec2 uv) {
+    uv*=.4;
+    vec3 col;
+    const float r = 5.;
+    for(float f = 1.; f <= r; f+=1.) {
+        uv*=f;
+    	col += texture(noiseTex, mod(uv, vec2(1.))).rrr;
+    }
+    col /= r;
+    return col;
+}
+
+vec3 bgNoise(vec2 uv) {
+    float nx = noise((uv + vec2(time * .1)) * .1 + vec2(0.2, 0.1)).r;
+    float ny = noise((uv + vec2(time * .1)) * .1 + vec2(0.3, 0.6)).r;
+    vec2 os = vec2(nx, ny);
+    vec3 turqoise = vec3(0.8, 1.2, 1.2); 
+    return noise(uv*.07 + os*.03) * .2; 
+}
+
 void main() {
     // Output to screen
 	vec3 lightDir = vec3(-4., 0., -3.);
-	vec3 eye = vec3(0., 0., -8.);
+	vec3 eye = vec3(0., 0., -8. + pow(max(0., (time - 6.) * 3.), 2.));
 	vec3 ray = normalize(vec3(uv, 2.));
 
-	eye = eye;
-	ray = ray;
-
-	float dist = rayMarch(eye, ray);
+	float y;
+	float dist = rayMarch(eye, ray, y);
 
 	vec3 col = vec3(0.);
+	//weights
 	if(dist < end - E) {
 		vec3 p = eye + ray * dist;
 		vec3 n = estimateNormal(p);
@@ -145,11 +177,15 @@ void main() {
 
 		vec2 mov;
 		if(uv.x > 0.)
-			mov = vec2(time * .04, time * .07);
+			mov = vec2(time * .04, time * .065);
 		else
-			mov = vec2(time * .04, time * -.07);
+			mov = vec2(time * .04, time * -.065);
 
-		vec2 texUV = (uv + vec2(0.9, 0.5)) / vec2(1.8, 1.) + mov;
+		vec2 texUV;
+		if(y < -.81)
+			texUV = (uv + vec2(0.9, 0.5)) / vec2(1.8, 1.) + mov;
+		else
+			texUV = (vec2(uv.x + 0.9 / 1.8, y)) + vec2(time * .04, 0.);
 
 		texUV.x = wrap(texUV.x);
 		texUV.y = wrap(texUV.y);
@@ -159,7 +195,12 @@ void main() {
 		tex = vec3(p.y * .3 + .2, .2, 0.2) * tex;
 
 		col = tex * vec3(light);
+	//bg
+	} else {
+		col = bgNoise(uv);
 	}
+
+	col = mix(vec3(.2), col, min(1., time));
 	
 	FragColor = vec4(col, 1.0);
 }
