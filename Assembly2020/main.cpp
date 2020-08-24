@@ -1,4 +1,4 @@
-#include <vector>
+﻿#include <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <GLFW/linmath.h>
@@ -80,10 +80,8 @@ int main(void)
 		Scene scene = scenes[sceneId]();
 		sceneId++;
 
-		//vertices
 		GLuint vertex_buffer = graphics::genBuffer(GL_ARRAY_BUFFER, scene.vertices);
 		GLuint index_buffer = graphics::genBuffer(GL_ELEMENT_ARRAY_BUFFER, scene.indices);
-		//indices
 
 		GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 		const char* vertex_shader_text = scene.vertexShader.c_str();
@@ -93,10 +91,6 @@ int main(void)
 		const char* fragment_shader_text = scene.fragmentShader.c_str();
 		glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
 		glCompileShader(fragment_shader);
-
-		glCullFace(GL_FRONT);
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
 
 		GLuint program = glCreateProgram();
 		glAttachShader(program, vertex_shader);
@@ -135,7 +129,7 @@ int main(void)
 
 		while (!glfwWindowShouldClose(window)) {
 			float time = (float)glfwGetTime() - startTime + testTime;
-			std::cout << 1.f / (time - lastTime) << std::endl;
+			//std::cout << 1.f / (time - lastTime) << std::endl;
 
 			if (time > scene.length) {
 				break;
@@ -148,22 +142,24 @@ int main(void)
 
 			glBindFramebuffer(GL_FRAMEBUFFER, post.framebuffer[0]);
 			glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[0]);
+
 			glViewport(0, 0, width, height);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 			mat4x4 mvp;
 			Camera::set(mvp, time);
 			glUseProgram(program);
 			glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)mvp);
 
 			glUniform1f(itime_location, time);
-
+			
 			for (int i = 0; i < textures.size(); i++) {
 				glActiveTexture(GL_TEXTURE2 + i);
 				glBindTexture(GL_TEXTURE_2D, textures[i]);
 				glUniform1i(textures[i], i + 2);
 			}
-
+			
 			glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 			
 			setVertexAttribArray(vpos_location, 3, scene, true);
@@ -204,7 +200,6 @@ int main(void)
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
 
 			glfwSwapBuffers(window);

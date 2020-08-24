@@ -18,7 +18,6 @@ Scene MovementScene::init() {
 	VertexArray vertices;
 	IndiceArray indices;
 	objReader("./media/movement.obj", vertices, indices);
-	objReader("./media/cubetest.obj", vertices, indices);
 
 	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, 0, post_vert.source, post_frag.source, 1 };
 }
