@@ -13,7 +13,7 @@ Scene MovementScene::init() {
 	shaderReader fragmentShader = shaderReader("movementScene.frag");
 
 	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_frag = shaderReader("movementScene.post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

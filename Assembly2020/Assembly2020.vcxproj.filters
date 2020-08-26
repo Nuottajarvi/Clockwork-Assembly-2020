@@ -152,6 +152,9 @@
     <None Include="movementScene.vert">
       <Filter>Source Files\MovementScene</Filter>
     </None>
+    <None Include="movementScene.post.frag">
+      <Filter>Source Files\MovementScene</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderReader.h">

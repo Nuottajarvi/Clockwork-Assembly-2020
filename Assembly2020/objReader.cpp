@@ -7,7 +7,7 @@
 #include "structs.h"
 #include "objReader.h"
 
-void objReader(std::string name, VertexArray &vertices, IndiceArray &indices) {
+void objReader(std::string name, VertexArray& vertices, IndiceArray& indices) {
 	objReader(name, vertices, indices, { 0, 0, 0 });
 }
 
@@ -51,8 +51,8 @@ float getInt(std::string& str) {
 	}
 }
 
-void objReader(std::string filename, VertexArray &vertices, IndiceArray &indices, Vec3 worldPos) {
-	
+void objReader(std::string filename, VertexArray& vertices, IndiceArray& indices, Vec3 worldPos) {
+
 	std::fstream input_stream;
 	input_stream.open(filename, input_stream.in);
 
@@ -61,29 +61,24 @@ void objReader(std::string filename, VertexArray &vertices, IndiceArray &indices
 		return;
 	}
 
-	/*
-	FILE * file = fopen(name.c_str(), "r");
-	if (file == NULL) {
-		printf("Impossible to open the file !\n");
-		return;
-	}*/
-
 	std::vector<Vec3> temp_vertices;
 	std::vector<Vec2> temp_uvs;
 	std::vector<Vec3> temp_normals;
 
-	while (!input_stream.eof()) {
+	int objId = 0;
 
-		//char lineHeader[128];
-		// read the first word of the line
+	while (!input_stream.eof()) {
 
 		std::string line;
 		std::getline(input_stream, line);
 
 		std::string header = shiftWord(line);
-		
-		if (header == "v") {
-			Vec3 vertex = { getFloat(line), getFloat(line), getFloat(line)};
+
+		if (header == "o") {
+			objId++;
+		}
+		else if (header == "v") {
+			Vec3 vertex = { getFloat(line), getFloat(line), getFloat(line) };
 			temp_vertices.emplace_back(vertex);
 		}
 		else if (header == "vt") {
@@ -120,8 +115,9 @@ void objReader(std::string filename, VertexArray &vertices, IndiceArray &indices
 					worldPos.x, worldPos.y, worldPos.z,
 					n.x, n.y, n.z,
 					tan.x, tan.y, tan.z,
-					bitan.x, bitan.y, bitan.z
-				});
+					bitan.x, bitan.y, bitan.z,
+					objId
+					});
 			}
 
 			indices.push_back(startIndice);

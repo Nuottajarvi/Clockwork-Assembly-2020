@@ -103,6 +103,7 @@ int main(void)
 		GLint vnor_location = glGetAttribLocation(program, "vNor");
 		GLint vtan_location = glGetAttribLocation(program, "vTan");
 		GLint vbitan_location = glGetAttribLocation(program, "vBitan");
+		GLint objId_location = glGetAttribLocation(program, "vObjId");
 
 		GLint itime_location = glGetUniformLocation(program, "iTime");
 
@@ -168,6 +169,7 @@ int main(void)
 			setVertexAttribArray(vnor_location, 3, scene);
 			setVertexAttribArray(vtan_location, 3, scene);
 			setVertexAttribArray(vbitan_location, 3, scene);
+			setVertexAttribArray(objId_location, 1, scene);
 
 			glDrawElements(GL_TRIANGLES, scene.indices.size(), GL_UNSIGNED_INT, (void*)0);
 

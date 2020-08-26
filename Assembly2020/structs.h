@@ -59,6 +59,7 @@ const struct Vertex
 	float nx, ny, nz; //normals
 	float tx, ty, tz; //tangents
 	float btx, bty, btz; //bitangents
+	int objId;
 };
 
 using VertexArray = std::vector<Vertex>;
