@@ -29,5 +29,5 @@ Scene Scene2::init() {
 	objReader("media/pendulum.obj", vertices, indices, { 1, 0, 0 });
 	objReader("media/automatabottom.obj", vertices, indices, { -1, 0, 0 });
 
-	return { 19., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 19., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, 0, post_vert.source, post_frag.source, 1 };
 }

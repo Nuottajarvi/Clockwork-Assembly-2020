@@ -1,6 +1,6 @@
 #pragma once
 
 namespace MovementScene {
-	TextureArray getTextures(GLuint program);
+	TextureArray getPostTextures(GLuint program);
 	Scene init();
 }

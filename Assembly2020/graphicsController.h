@@ -24,8 +24,8 @@ namespace graphics {
 		GLuint vertex_shader;
 		GLuint program;
 		GLuint vbo_fbo_vertices;
-		std::array<GLuint, 2> textureColorbuffer;
-		std::array<GLuint, 2> framebuffer;
+		std::array<GLuint, 2> textureColorbuffer = std::array<GLuint, 2>();
+		std::array<GLuint, 2> framebuffer = std::array<GLuint, 2>();
 
 		GLuint fbo_texture_location;
 		GLuint v_coord_location;
@@ -33,5 +33,5 @@ namespace graphics {
 		GLuint pass_location;
 	};
 
-	Post setupPost(Window window, Scene scene);
+	std::unique_ptr<Post> setupPost(Window window, Scene scene);
 }

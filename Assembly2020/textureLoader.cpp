@@ -14,7 +14,7 @@ GLint loadTexture(std::string fileName, std::string attributeName, GLuint progra
 	int width, height, nrChannels;
 	unsigned char *data = stbi_load(fileName.c_str(), &width, &height, &nrChannels, 0);
 
-	GLint tex;
+	GLint tex = -1;
 	if (data)
 	{
 		tex = glGetUniformLocation(program, attributeName.c_str());

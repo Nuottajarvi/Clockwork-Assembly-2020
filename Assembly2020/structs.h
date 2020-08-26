@@ -59,6 +59,7 @@ const struct Vertex
 	float nx, ny, nz; //normals
 	float tx, ty, tz; //tangents
 	float btx, bty, btz; //bitangents
+	int objId;
 };
 
 using VertexArray = std::vector<Vertex>;
@@ -73,6 +74,7 @@ const struct Scene
 	std::string vertexShader;
 	std::string fragmentShader;
 	TextureArray (*getTextures)(GLuint);
+	TextureArray(*getPostTextures)(GLuint);
 	std::string postVertexShader;
 	std::string postFragmentShader;
 	int postRuns;

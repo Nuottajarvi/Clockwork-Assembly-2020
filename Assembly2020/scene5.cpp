@@ -19,5 +19,5 @@ Scene Scene5::init() {
 	IndiceArray indices;
 	SceneHelpers::createBg(vertices, indices);
 
-	return { 22.5, vertices, indices, vertexShader.source, fragmentShader.source, 0, post_vert.source, post_frag.source, 1 };
+	return { 22.5, vertices, indices, vertexShader.source, fragmentShader.source, 0, 0, post_vert.source, post_frag.source, 1 };
 }

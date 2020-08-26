@@ -29,5 +29,5 @@ Scene Scene1::init() {
 
 	IndiceArray indices{ 0, 1, 2, 2, 3, 0 };
 
-	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, 0, post_vert.source, post_frag.source, 1 };
 }

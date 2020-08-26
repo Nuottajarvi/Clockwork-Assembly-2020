@@ -103,6 +103,7 @@ int main(void)
 		GLint vnor_location = glGetAttribLocation(program, "vNor");
 		GLint vtan_location = glGetAttribLocation(program, "vTan");
 		GLint vbitan_location = glGetAttribLocation(program, "vBitan");
+		GLint objId_location = glGetAttribLocation(program, "vObjId");
 
 		GLint itime_location = glGetUniformLocation(program, "iTime");
 
@@ -120,7 +121,10 @@ int main(void)
 		checkErrors(program);
 		
 		//POST PROCESSING
-		graphics::Post post = graphics::setupPost(screen, scene);
+		graphics::Post post = *graphics::setupPost(screen, scene);
+		TextureArray postTextures;
+		if (scene.getPostTextures != 0)
+			postTextures = scene.getPostTextures(post.program);
 
 		float startTime = (float)glfwGetTime();
 
@@ -159,7 +163,7 @@ int main(void)
 				glBindTexture(GL_TEXTURE_2D, textures[i]);
 				glUniform1i(textures[i], i + 2);
 			}
-			
+
 			glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 			
 			setVertexAttribArray(vpos_location, 3, scene, true);
@@ -168,6 +172,7 @@ int main(void)
 			setVertexAttribArray(vnor_location, 3, scene);
 			setVertexAttribArray(vtan_location, 3, scene);
 			setVertexAttribArray(vbitan_location, 3, scene);
+			setVertexAttribArray(objId_location, 1, scene);
 
 			glDrawElements(GL_TRIANGLES, scene.indices.size(), GL_UNSIGNED_INT, (void*)0);
 
@@ -185,7 +190,9 @@ int main(void)
 				0                   // offset of first element
 			);
 
+			glActiveTexture(GL_TEXTURE0);
 			glUniform1i(post.fbo_texture_location, GL_TEXTURE0);
+			
 			glUniform1f(post.itime_location, time);
 
 			for (int i = 0; i < scene.postRuns; i++) {
@@ -194,8 +201,15 @@ int main(void)
 				glActiveTexture(GL_TEXTURE0 + i % 2);
 				glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[i % 2]);
 				glUniform1i(post.pass_location, i);
+				for (int i = 0; i < postTextures.size(); i++) {
+					glActiveTexture(GL_TEXTURE1);
+					glBindTexture(GL_TEXTURE_2D, postTextures[i]);
+					glUniform1i(postTextures[i], GL_TEXTURE1);
+				}
 				glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
 			}
+
+			glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
 
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -210,11 +224,15 @@ int main(void)
 		if(textures.size() > 0)
 			glDeleteTextures(textures.size(), (const GLuint*) &textures[0]);
 
+		if (postTextures.size() > 0)
+			glDeleteTextures(postTextures.size(), (const GLuint*)&postTextures[0]);
+
 		glDeleteProgram(program);
 		GLuint buffers[] = { 
 			vertex_buffer, index_buffer, vertex_shader, fragment_shader, program
 		};
 
+		glDeleteProgram(post.program);
 		GLuint postbuffers[] = {
 			post.fragment_shader, post.vertex_shader, post.program
 		};

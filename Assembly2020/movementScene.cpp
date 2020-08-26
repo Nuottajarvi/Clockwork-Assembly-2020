@@ -6,6 +6,13 @@
 #include "movementScene.h"
 #include "objReader.h"
 
+TextureArray MovementScene::getPostTextures(GLuint program) {
+	TextureArray textures;
+	textures.push_back(loadTexture("media/perlin.png", "perlinTex", program));
+	return textures;
+}
+
+
 Scene MovementScene::init() {
 	//escapement
 
@@ -13,11 +20,11 @@ Scene MovementScene::init() {
 	shaderReader fragmentShader = shaderReader("movementScene.frag");
 
 	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_frag = shaderReader("movementScene.post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;
 	objReader("./media/movement.obj", vertices, indices);
 
-	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, 0, post_vert.source, post_frag.source, 1 };
+	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, 0, getPostTextures, post_vert.source, post_frag.source, 1 };
 }

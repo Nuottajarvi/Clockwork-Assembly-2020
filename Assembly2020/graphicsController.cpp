@@ -76,20 +76,21 @@ namespace graphics {
 		return 1;
 	}
 
-	Post setupPost(Window window, Scene scene) {
-		Post post;
-		glGenFramebuffers(2, post.framebuffer.data());
+	std::unique_ptr<Post> setupPost(Window window, Scene scene) {
+		std::unique_ptr<Post> post = std::make_unique<Post>();
+		glGenFramebuffers(2, post->framebuffer.data());
 
-		glGenTextures(2, post.textureColorbuffer.data());
+		glGenTextures(2, post->textureColorbuffer.data());
 		for (int i = 0; i < 2; i++) {
-			glBindFramebuffer(GL_FRAMEBUFFER, post.framebuffer[i]);
-			glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[i]);
+			glBindFramebuffer(GL_FRAMEBUFFER, post->framebuffer[i]);
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, post->textureColorbuffer[i]);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, window.width, window.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, post.textureColorbuffer[i], 0);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, post->textureColorbuffer[i], 0);
 
 			GLuint depthrenderbuffer;
 			glGenRenderbuffers(1, &depthrenderbuffer);
@@ -106,18 +107,18 @@ namespace graphics {
 		const char* frag_text = scene.postFragmentShader.c_str();
 		glCreateShader(GL_FRAGMENT_SHADER);
 
-		post.fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(post.fragment_shader, 1, &frag_text, NULL);
-		glCompileShader(post.fragment_shader);
+		post->fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(post->fragment_shader, 1, &frag_text, NULL);
+		glCompileShader(post->fragment_shader);
 
-		post.vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(post.vertex_shader, 1, &vert_text, NULL);
-		glCompileShader(post.vertex_shader);
+		post->vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(post->vertex_shader, 1, &vert_text, NULL);
+		glCompileShader(post->vertex_shader);
 
-		post.program = glCreateProgram();
-		glAttachShader(post.program, post.vertex_shader);
-		glAttachShader(post.program, post.fragment_shader);
-		glLinkProgram(post.program);
+		post->program = glCreateProgram();
+		glAttachShader(post->program, post->vertex_shader);
+		glAttachShader(post->program, post->fragment_shader);
+		glLinkProgram(post->program);
 
 		GLfloat fbo_vertices[] = {
 			-1,   1,
@@ -126,18 +127,18 @@ namespace graphics {
 			 1,  -1
 		};
 
-		glGenBuffers(1, &(post.vbo_fbo_vertices));
-		glBindBuffer(GL_ARRAY_BUFFER, post.vbo_fbo_vertices);
+		glGenBuffers(1, &(post->vbo_fbo_vertices));
+		glBindBuffer(GL_ARRAY_BUFFER, post->vbo_fbo_vertices);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(fbo_vertices), fbo_vertices, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		post.fbo_texture_location = glGetUniformLocation(post.program, "fbo_tex");
-		post.v_coord_location = glGetAttribLocation(post.program, "v_coord");
-		post.itime_location = glGetUniformLocation(post.program, "iTime");
-		post.pass_location = glGetUniformLocation(post.program, "iPass");
+		post->fbo_texture_location = glGetUniformLocation(post->program, "fbo_tex");
+		post->v_coord_location = glGetAttribLocation(post->program, "v_coord");
+		post->itime_location = glGetUniformLocation(post->program, "iTime");
+		post->pass_location = glGetUniformLocation(post->program, "iPass");
 
 		//ERROR CHECKING FOR POST
-		checkErrors(post.program);
+		checkErrors(post->program);
 
 		return post;
 	}

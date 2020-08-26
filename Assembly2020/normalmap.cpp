@@ -26,5 +26,5 @@ Scene Normalmap::init() {
 	IndiceArray indices;
 	objReader("media/cube.obj", vertices, indices, { 1, 0, 0 });
 
-	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, 0, post_vert.source, post_frag.source, 1 };
 }
