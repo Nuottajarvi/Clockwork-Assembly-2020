@@ -3,21 +3,21 @@
 #include "structs.h"
 #include <iostream>
 #include "textureLoader.h"
-#include "scene4.h"
+#include "escapementScene.h"
 #include "sceneHelpers.h"
 
-TextureArray Scene4::getTextures(GLuint program) {
+TextureArray Escapement::getTextures(GLuint program) {
 	TextureArray textures;
 	textures.push_back(loadTexture("media/noise.png", "noiseTex", program));
 	return textures;
 }
 
 
-Scene Scene4::init() {
+Scene Escapement::init() {
 	//escapement
 
-	shaderReader vertexShader = shaderReader("scene4.vert");
-	shaderReader fragmentShader = shaderReader("scene4.frag");
+	shaderReader vertexShader = shaderReader("escapement.vert");
+	shaderReader fragmentShader = shaderReader("escapement.frag");
 
 	shaderReader post_vert = shaderReader("post.vert");
 	shaderReader post_frag = shaderReader("antialias-post.frag");

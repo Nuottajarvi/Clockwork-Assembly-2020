@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Scene5 {
+namespace Weights {
 	TextureArray getTextures(GLuint program);
 	Scene init();
 }

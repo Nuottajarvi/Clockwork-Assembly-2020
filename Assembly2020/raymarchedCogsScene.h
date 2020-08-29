@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Scene2 {
+namespace RaymarchedCogs {
 	TextureArray getTextures(GLuint program);
 	Scene init();
 }

@@ -1,5 +1,5 @@
 #pragma once
 
-namespace Scene6 {
+namespace TrippyCogs {
 	Scene init();
 }

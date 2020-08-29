@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Scene3 {
+namespace Escapement {
 	TextureArray getTextures(GLuint program);
 	Scene init();
 }

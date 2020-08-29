@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Scene4 {
+namespace IntroScene {
 	TextureArray getTextures(GLuint program);
 	Scene init();
 }

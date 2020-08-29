@@ -16,26 +16,26 @@
     <Filter Include="Source Files\Scene1">
       <UniqueIdentifier>{770fe96a-7c06-42bd-adb5-17469f9aac99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Scene2">
-      <UniqueIdentifier>{c0383da2-357d-4f74-8adb-8e9a2370877f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Normalmapping">
       <UniqueIdentifier>{2b934829-472f-4470-be9a-3a2926c4cb66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Scene3">
-      <UniqueIdentifier>{e860237f-126b-48f0-baea-777bc6a483c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Scene4">
-      <UniqueIdentifier>{9845b7e9-be61-4f08-ac83-ee3098eece73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Scene5">
-      <UniqueIdentifier>{d36fa70c-e307-4939-a8ed-13f430891b01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Scene6">
-      <UniqueIdentifier>{7238fa4c-4a87-43f0-9b1a-23c17d56d6a0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\MovementScene">
       <UniqueIdentifier>{f554cf03-68c7-4b92-b4e4-141391154cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intro">
+      <UniqueIdentifier>{c0383da2-357d-4f74-8adb-8e9a2370877f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Weights">
+      <UniqueIdentifier>{e860237f-126b-48f0-baea-777bc6a483c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Escapement">
+      <UniqueIdentifier>{9845b7e9-be61-4f08-ac83-ee3098eece73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RaymarchedCogs">
+      <UniqueIdentifier>{d36fa70c-e307-4939-a8ed-13f430891b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TrippyCogs">
+      <UniqueIdentifier>{7238fa4c-4a87-43f0-9b1a-23c17d56d6a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,9 +57,6 @@
     <ClCompile Include="scene1.cpp">
       <Filter>Source Files\Scene1</Filter>
     </ClCompile>
-    <ClCompile Include="scene2.cpp">
-      <Filter>Source Files\Scene2</Filter>
-    </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,23 +72,26 @@
     <ClCompile Include="normalmap.cpp">
       <Filter>Source Files\Normalmapping</Filter>
     </ClCompile>
-    <ClCompile Include="scene3.cpp">
-      <Filter>Source Files\Scene3</Filter>
-    </ClCompile>
     <ClCompile Include="sceneHelpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene4.cpp">
-      <Filter>Source Files\Scene4</Filter>
-    </ClCompile>
-    <ClCompile Include="scene5.cpp">
-      <Filter>Source Files\Scene5</Filter>
-    </ClCompile>
-    <ClCompile Include="scene6.cpp">
-      <Filter>Source Files\Scene6</Filter>
-    </ClCompile>
     <ClCompile Include="movementScene.cpp">
       <Filter>Source Files\MovementScene</Filter>
+    </ClCompile>
+    <ClCompile Include="introScene.cpp">
+      <Filter>Source Files\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="weightsScene.cpp">
+      <Filter>Source Files\Weights</Filter>
+    </ClCompile>
+    <ClCompile Include="trippyCogsScene.cpp">
+      <Filter>Source Files\TrippyCogs</Filter>
+    </ClCompile>
+    <ClCompile Include="raymarchedCogsScene.cpp">
+      <Filter>Source Files\RaymarchedCogs</Filter>
+    </ClCompile>
+    <ClCompile Include="escapementScene.cpp">
+      <Filter>Source Files\Escapement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,44 +107,11 @@
     <None Include="post.vert">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="scene2.frag">
-      <Filter>Source Files\Scene2</Filter>
-    </None>
-    <None Include="scene2.vert">
-      <Filter>Source Files\Scene2</Filter>
-    </None>
-    <None Include="post2.frag">
-      <Filter>Source Files\Scene2</Filter>
-    </None>
     <None Include="normalmap.frag">
       <Filter>Source Files\Normalmapping</Filter>
     </None>
     <None Include="normalmap.vert">
       <Filter>Source Files\Normalmapping</Filter>
-    </None>
-    <None Include="scene3.frag">
-      <Filter>Source Files\Scene3</Filter>
-    </None>
-    <None Include="scene3.vert">
-      <Filter>Source Files\Scene3</Filter>
-    </None>
-    <None Include="scene4.frag">
-      <Filter>Source Files\Scene4</Filter>
-    </None>
-    <None Include="scene4.vert">
-      <Filter>Source Files\Scene4</Filter>
-    </None>
-    <None Include="scene5.frag">
-      <Filter>Source Files\Scene5</Filter>
-    </None>
-    <None Include="scene5.vert">
-      <Filter>Source Files\Scene5</Filter>
-    </None>
-    <None Include="scene6.frag">
-      <Filter>Source Files\Scene6</Filter>
-    </None>
-    <None Include="scene6.vert">
-      <Filter>Source Files\Scene6</Filter>
     </None>
     <None Include="movementScene.frag">
       <Filter>Source Files\MovementScene</Filter>
@@ -154,6 +121,39 @@
     </None>
     <None Include="movementScene.post.frag">
       <Filter>Source Files\MovementScene</Filter>
+    </None>
+    <None Include="intro.frag">
+      <Filter>Source Files\Intro</Filter>
+    </None>
+    <None Include="intro.vert">
+      <Filter>Source Files\Intro</Filter>
+    </None>
+    <None Include="intro.post.frag">
+      <Filter>Source Files\Intro</Filter>
+    </None>
+    <None Include="weights.frag">
+      <Filter>Source Files\Weights</Filter>
+    </None>
+    <None Include="weights.vert">
+      <Filter>Source Files\Weights</Filter>
+    </None>
+    <None Include="escapement.frag">
+      <Filter>Source Files\Escapement</Filter>
+    </None>
+    <None Include="escapement.vert">
+      <Filter>Source Files\Escapement</Filter>
+    </None>
+    <None Include="raymarchedCogs.frag">
+      <Filter>Source Files\RaymarchedCogs</Filter>
+    </None>
+    <None Include="raymarchedCogs.vert">
+      <Filter>Source Files\RaymarchedCogs</Filter>
+    </None>
+    <None Include="trippyCogs.frag">
+      <Filter>Source Files\TrippyCogs</Filter>
+    </None>
+    <None Include="trippyCogs.vert">
+      <Filter>Source Files\TrippyCogs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +172,6 @@
     <ClInclude Include="scene1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="graphicsController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -187,22 +184,25 @@
     <ClInclude Include="normalmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sceneHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scene5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scene6.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="movementScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="introScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="weightsScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="escapementScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raymarchedCogsScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trippyCogsScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

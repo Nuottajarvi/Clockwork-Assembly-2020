@@ -1,7 +1,7 @@
 #version 130
 uniform mat4 MVP;
 uniform float iTime;
-attribute vec3 vWorldPos;
+in int vObjId;
 in vec3 vCol;
 in vec3 vPos;
 in vec2 vTex;
@@ -23,7 +23,7 @@ mat3 rotZ(float r) {
 void main()
 {
 	const float t3 = 12.;
-	if(/*isPendulum*/vWorldPos.x > 0.5) {
+	if(/*isPendulum*/vObjId == 1) {
 		isBg = 0;
 		vec3 os = vec3(0., -8., 5.);
 		float swing = sin(iTime - PI / 2.);
@@ -31,7 +31,7 @@ void main()
 		mat3 rot = rotZ(swing);
 		vec3 pos = rot * vPos - os;
 		gl_Position = MVP * vec4(pos, 1.0);
-	} else if(/*isBase*/vWorldPos.x < -0.5) {
+	} else if(/*isBase*/vObjId == 2) {
 		isBg = 0;
 		vec3 os = vec3(0., 6., 2.);
 		vec3 pos = vPos * 8. - os;

@@ -3,14 +3,14 @@
 #include "structs.h"
 #include <iostream>
 #include "textureLoader.h"
-#include "scene5.h"
+#include "raymarchedCogsScene.h"
 #include "sceneHelpers.h"
 
-Scene Scene5::init() {
+Scene RaymarchedCogs::init() {
 	//escapement
 
-	shaderReader vertexShader = shaderReader("scene5.vert");
-	shaderReader fragmentShader = shaderReader("scene5.frag");
+	shaderReader vertexShader = shaderReader("raymarchedCogs.vert");
+	shaderReader fragmentShader = shaderReader("raymarchedCogs.frag");
 
 	shaderReader post_vert = shaderReader("post.vert");
 	shaderReader post_frag = shaderReader("antialias-post.frag");

@@ -6,6 +6,14 @@
 #include "movementScene.h"
 #include "objReader.h"
 
+TextureArray MovementScene::getTextures(GLuint program) {
+	TextureArray textures;
+	textures.push_back(loadTexture("media/Metal/Metal_scratched_003_COLOR.png", "metalTex", program));
+	textures.push_back(loadTexture("media/Metal/Metal_scratched_003_NRM.png", "metalNormalTex", program));
+	textures.push_back(loadTexture("media/Metal/Metal_scratched_003_SPEC.png", "metalSpecTex", program));
+	return textures;
+}
+
 Scene MovementScene::init() {
 	//escapement
 
@@ -19,5 +27,7 @@ Scene MovementScene::init() {
 	IndiceArray indices;
 	objReader("./media/movement.obj", vertices, indices);
 
-	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, 0, post_vert.source, post_frag.source, 1 };
+	glEnable(GL_DEPTH_TEST);
+
+	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
 }

@@ -21,7 +21,7 @@ float Camera::smoothStep(float x) {
 
 void Camera::updateM(mat4x4 &m, float time) {
 
-	//scene 1
+	//intro scene
 	/*
 	const float t0 = 13.; //starting zoom out
 	const float t1 = 18.;  //zoom in
@@ -33,13 +33,12 @@ void Camera::updateM(mat4x4 &m, float time) {
 		//mat4x4_translate(m, 0., (time - t1) * .5, (t1 - t0)*-0.5 + (time - t1) * 1.);
 		//mat4x4_translate(m, 0., (time - t1) * (time - t1) * -1., (time - t1) * (time - t1));// );
 		//mat4x4_rotate_X(m, m, (t1 - t0) * -0.1 + (time - t1) * 0.05);
-	}*/
-
+	}
+	*/
 	//movement scene
 	vec3 loc = { 0. + sin(time / 3.) * 6., -2.5 + cos(time / 3.) * 5., 7. - sin(time / 10.) * 4. };
-	vec3 eye = { 0.5, 0., 0. };
+	vec3 eye = { 0.5, std::max(0., 15. - time * 3.), 0. };
 	vec3 up = { 0., 0., 1. };
 	mat4x4_translate(m, loc[0], loc[1], loc[2]);
 	mat4x4_look_at(m, loc, eye, up);
-	//mat4x4_rotate_X(m, m, -.7);
 }

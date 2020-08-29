@@ -13,11 +13,11 @@
 #include "camera.h"
 #include "shaderReader.h"
 #include "scene1.h"
-#include "scene2.h"
-#include "scene3.h"
-#include "scene4.h"
-#include "scene5.h"
-#include "scene6.h"
+#include "introScene.h"
+#include "weightsScene.h"
+#include "escapementScene.h"
+#include "raymarchedCogsScene.h"
+#include "trippyCogsScene.h"
 #include "movementScene.h"
 #include "normalmap.h"
 #include "textureLoader.h"
@@ -71,7 +71,7 @@ int main(void)
 	GLFWwindow* window = graphics::initWindow(screen, "Automata");
 
 	int sceneId = 0;
-	Scene(*scenes[])() = {/*Scene2::init, Scene3::init, Scene4::init, Scene5::init, Scene6::init*/ MovementScene::init};
+	Scene(*scenes[])() = {/*IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init,*/ MovementScene::init};
 
 	//ShowCursor(0);
 	//PlaySound("./music.wav", NULL, SND_ASYNC);
@@ -145,7 +145,7 @@ int main(void)
 			glBindTexture(GL_TEXTURE_2D, post.textureColorbuffer[0]);
 
 			glViewport(0, 0, width, height);
-			glClearColor(0.0, 0.0, 0.0, 1.0);
+			glClearColor(1.0, 1.0, 1.0, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			mat4x4 mvp;

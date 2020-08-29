@@ -4,21 +4,21 @@
 #include "objReader.h"
 #include "textureLoader.h"
 #include <iostream>
-#include "scene3.h"
+#include "weightsScene.h"
 #include "sceneHelpers.h"
 
-TextureArray Scene3::getTextures(GLuint program) {
+TextureArray Weights::getTextures(GLuint program) {
 	TextureArray textures;
 	textures.push_back(loadTexture("media/metal.png", "metalTex", program));
 	textures.push_back(loadTexture("media/noise.png", "noiseTex", program));
 	return textures;
 }
 
-Scene Scene3::init() {
+Scene Weights::init() {
 	//weights
 
-	shaderReader vertexShader = shaderReader("scene3.vert");
-	shaderReader fragmentShader = shaderReader("scene3.frag");
+	shaderReader vertexShader = shaderReader("weights.vert");
+	shaderReader fragmentShader = shaderReader("weights.frag");
 
 	shaderReader post_vert = shaderReader("post.vert");
 	shaderReader post_frag = shaderReader("antialias-post.frag");

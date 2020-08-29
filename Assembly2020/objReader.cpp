@@ -7,8 +7,8 @@
 #include "structs.h"
 #include "objReader.h"
 
-void objReader(std::string name, VertexArray& vertices, IndiceArray& indices) {
-	objReader(name, vertices, indices, { 0, 0, 0 });
+void objReader(std::string name, VertexArray& vertices, IndiceArray& indices, int objIdOverride) {
+	objReader(name, vertices, indices, { 0, 0, 0 }, objIdOverride);
 }
 
 struct Tangents {
@@ -51,7 +51,7 @@ float getInt(std::string& str) {
 	}
 }
 
-void objReader(std::string filename, VertexArray& vertices, IndiceArray& indices, Vec3 worldPos) {
+void objReader(std::string filename, VertexArray& vertices, IndiceArray& indices, Vec3 worldPos, int objIdOverride) {
 
 	std::fstream input_stream;
 	input_stream.open(filename, input_stream.in);
@@ -116,7 +116,7 @@ void objReader(std::string filename, VertexArray& vertices, IndiceArray& indices
 					n.x, n.y, n.z,
 					tan.x, tan.y, tan.z,
 					bitan.x, bitan.y, bitan.z,
-					objId
+					objIdOverride != -1 ? objIdOverride : objId
 					});
 			}
 

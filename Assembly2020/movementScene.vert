@@ -2,15 +2,20 @@
 uniform mat4 MVP;
 uniform float iTime;
 
-attribute vec3 vWorldPos;
+in vec3 vWorldPos;
 in vec3 vPos;
 in vec3 vNor;
+in vec3 vTan;
+in vec3 vBitan;
 in vec2 vTex;
 in int vObjId;
 
 out vec2 uv;
 out float time;
 out vec3 nor;
+out vec3 tang;
+out vec3 bitan;
+out vec4 viewDir;
 
 mat3 rotX(float r) {
 	float cr = cos(r);
@@ -52,18 +57,26 @@ void main()
     float t = iTime * .5;
     if(vObjId == 1) {
         pos = rotY(t * 1.5) * (pos - cog1pos.xzy) + cog1pos.xzy;
+        nor = rotY(t * 1.5) * vNor;
     }
     else if(vObjId == 2) {
         pos = rotY(t / 4. + 0.01) * pos;
+        nor = rotY(t / 4. + 0.01) * vNor;
     }
     else if(vObjId == 3) {
         pos = rotY(-t) * (pos - cog3pos.xzy) + cog3pos.xzy;
+        nor = rotY(-t) * vNor;
     }
     else if(vObjId == 4) {
         pos = rotY(-t * 2.66667 / 4.) * (pos - cog4pos.xzy) + cog4pos.xzy;
+        nor = rotY(-t * 2.66667 / 4.) * vNor;
     }
     pos = pos.xzy;
     gl_Position = MVP * vec4(pos, 1.0);
+    viewDir = MVP * vec4(pos, 1.0);
     time = iTime;
-    nor = vNor;
+    uv = vTex;
+    tang = vTan;
+    bitan = vBitan;
+    //MVPnor.xyz;
 }
