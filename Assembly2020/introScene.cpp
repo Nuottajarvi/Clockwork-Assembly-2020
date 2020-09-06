@@ -14,8 +14,6 @@ TextureArray IntroScene::getTextures(GLuint program) {
 }
 
 Scene IntroScene::init() {
-	//intro, pendulum
-
 	shaderReader vertexShader = shaderReader("intro.vert");
 	shaderReader fragmentShader = shaderReader("intro.frag");
 
@@ -27,9 +25,9 @@ Scene IntroScene::init() {
 
 	SceneHelpers::createBg(vertices, indices);
 	objReader("media/pendulum.obj", vertices, indices, 1);
-	objReader("media/automatabottom.obj", vertices, indices, 2);
+	objReader("media/clock.obj", vertices, indices, 2);
 
 	glDisable(GL_DEPTH_TEST);
 
-	return { 19., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 15.5, vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
 }

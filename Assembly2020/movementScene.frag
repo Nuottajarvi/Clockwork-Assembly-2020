@@ -25,7 +25,7 @@ vec3 normalMap() {
 		normalize(bitan),
 		normalize(-nor)
 	);
-	vec3 N = -normalize((tex - vec3(0.5)) * .25);
+	vec3 N = -normalize((tex - vec3(0.5)) * .05);
 	return TBN * N;
 }
 
@@ -39,11 +39,11 @@ void main()
 
     
     vec3 col;
-    if(time > 32) {
+    if(time > 34) {
         col = vec3(0.);
-    } else if(time > 31) {
-        col = mix(vec3(0.5 + diffuse * .2 + spec * .5), vec3(0.), time - 31);
-    } else if(time < 10.9 || time >= 25) {
+    } else if(time > 32 && time <= 34) {
+        col = mix(vec3(0.5 + diffuse * .2 + spec * .5), vec3(0.), (time - 32) * .5);
+    } else if(time < 10.9 || time >= 24.5) {
         col = vec3(0.5 + diffuse * .2 + spec * .5);
     } else if(time < 11.4) {
         col = mix(vec3(0.5 + diffuse * .2 + spec * .5), abs(nor), (time - 10.9) * 2);

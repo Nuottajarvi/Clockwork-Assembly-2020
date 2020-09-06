@@ -46,7 +46,7 @@ vec3 redGreenEffect() {
 
 	float buzzR = buzz(-15.);
 	col.r += texture(fbo_tex, uv).r * buzzR;
-	vec2 newUV = uv * 0.8 + vec2(0.4, 0.);
+	vec2 newUV = uv * 0.8 + vec2(0., 0.);
 
 	if(iTime > 18 && iTime < 23) {
 		float buzzG = buzz(-15. + PI);
@@ -89,61 +89,73 @@ vec3 distortEffect() {
 	return col;
 }
 
-vec3 blackEffect() {
-	if(length(texture(fbo_tex, uv).rgb) < 1.44) {
-		return vec3(0.);
+/* RAYMARCH */
+
+float E = 0.001;
+float maxd = 100.;
+
+/* return normal and dist */
+vec4 SDF(vec3 p){
+    p.xyz = mod(p.xyz, vec3(.25, .25, .5));
+    
+    
+    p -= vec3(.125, .125, .25);
+    
+	return vec4(normalize(p), length(p) - .05);
+}
+
+vec4 rayMarch(vec3 eye, vec3 rayDir) {
+	float depth = 0.;
+
+    for(int i = 0; i < 255; i++) {
+    	vec3 p = eye + rayDir * depth;
+        vec4 data = SDF(p);
+        if(data.w < E) {
+        	return vec4(data.xyz, depth);
+        }
+           
+        depth += data.w;
+        
+        if(depth > maxd)
+            return vec4(vec3(0.), maxd);
+    }
+
+	return vec4(vec3(0.), maxd);
+}
+
+vec3 raymarchEffect()
+{  
+	if(length(texture(fbo_tex, uv).rgb) < 1.4) {
+    
+		vec3 eye = vec3(iTime * .25, 0., -2. + iTime);
+		vec3 rayDir = normalize(vec3(uv.x - .5, uv.y / 1.777 - .5, 2.));
+
+		vec3 color = vec3(0.);
+
+		// Time varying pixel color
+		vec4 data = rayMarch(eye, rayDir);
+		vec3 col = vec3(data.w * .1);
+
+		vec3 n = data.rgb;
+    
+		vec3 lightSource = normalize(vec3(4., 0., -8.));
+		float diffuse = dot(normalize(-lightSource), n);
+		vec3 viewDir = normalize(-rayDir);
+		vec3 reflectDir = reflect(lightSource, n); 
+		float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.);
+    
+		col += vec3(max(0., diffuse * .5 + spec * .5));
+    
+		return col;
 	} else {
 		return vec3(1.);
 	}
 }
 
-float E = 0.001;
-
-float SDF(vec3 p){
-	return length(p) - .05;
-}
-
-float rayMarch(vec3 eye, vec3 rayDir) {
-	float depth = 0.;
-
-    for(int i = 0; i < 32; i++) {
-    	vec3 p = eye + rayDir * depth;
-        float dist = SDF(p);
-        if(dist < E) {
-        	return dist;
-        }
-           
-        depth += dist;
-    }
-
-	return 100.;
-}
-
-
-vec3 raymarchEffect() {
-	//if(length(texture(fbo_tex, uv).rgb) < 1.4) {
-   
-		vec3 eye = vec3(0., 0., -2.);
-		vec3 rayDir = normalize(vec3(uv.x - .5, uv.y / 1.777 - .5, 2.));
-    
-		vec3 color = vec3(0.);
-		
-		float dist = rayMarch(eye, rayDir);
-
-		if(dist < E) {
-			color = vec3(1.);
-		}
-
-		return color;
-	//} else {
-	//	return vec3(1.);
-	//}
-}
-
 void main(void) {
 
 	vec3 col;
-	if(iTime < 10 || (iTime >= 26 && iTime < 28)) {
+	if(iTime < 10 || (iTime >= 25 && iTime < 28) || (iTime >= 28 + PI && iTime < 32)) {
 		col = texture(fbo_tex, uv).rgb;
 	} else if(iTime >= 10 && iTime < 11) {
 		col = mix(texture(fbo_tex, uv).rgb, edgeDetect(), iTime - 10.);
@@ -151,21 +163,25 @@ void main(void) {
 		col = edgeDetect();
 	} else if(iTime >= 15 && iTime < 16) {
 		col = mix(edgeDetect(), redGreenEffect(), iTime - 15);
-	} else if(iTime >= 16 && iTime < 24) {
+	} else if(iTime >= 16 && iTime < 24.5) {
 		col = redGreenEffect();
-	} else if(iTime >= 25 && iTime < 26) {
-		col = mix(redGreenEffect(), texture(fbo_tex, uv).rgb, iTime - 25);
+	} else if(iTime >= 24.5 && iTime < 25.5) {
+		col = mix(redGreenEffect(), texture(fbo_tex, uv).rgb, iTime - 24);
 	} else if(iTime >= 28 && iTime < 28 + PI) {
 		col = distortEffect();
-	} else if(iTime >= 28 + PI && iTime < 33) {
-		col = mix(texture(fbo_tex, uv).rgb, blackEffect(), (iTime - 28 + PI) * 0.53);
-	} else if(iTime >= 33 && iTime < 34) {
-		col = mix(blackEffect(), raymarchEffect(), iTime - 33);
-	} else {
+	} else if(iTime >= 32 && iTime < 34) {
+		col = texture(fbo_tex, uv).rgb;
+	} else if(iTime >= 34 && iTime < 38) {
+		col = texture(fbo_tex, uv).rgb;
+	} else if(iTime >= 38 && iTime < 41) {
+		col = mix(texture(fbo_tex, uv).rgb, raymarchEffect(), (iTime - 38) * .33);
+	} else if(iTime >= 41 && iTime < 60) {
 		col = raymarchEffect();
+	} else if(iTime >= 60 && iTime < 63) {
+		col = mix(raymarchEffect(), vec3(1.), (iTime - 60) * .33);
+	} else {
+		col = vec3(1.);
 	}
-
-	col = raymarchEffect();
 
 	gl_FragColor = vec4(col, 1.);
 }

@@ -104,7 +104,6 @@ vec3 bgNoise(vec2 uv) {
     float nx = noise((uv + vec2(t * .1)) * .1 + vec2(0.2, 0.1)).r;
     float ny = noise((uv + vec2(t * .1)) * .1 + vec2(0.3, 0.6)).r;
     vec2 os = vec2(nx, ny);
-    vec3 turqoise = vec3(0.8, 1.2, 1.2);
     float diff = .4 * smoothstep(0., 1., max(0., (time - 1.) * .25));
     return noise(uv*.07 + os*.03) * .2 * vec3(1. - diff, 1. + diff, 1. + diff); 
 }

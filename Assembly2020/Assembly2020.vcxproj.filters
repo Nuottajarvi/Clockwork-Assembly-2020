@@ -37,6 +37,15 @@
     <Filter Include="Source Files\TrippyCogs">
       <UniqueIdentifier>{7238fa4c-4a87-43f0-9b1a-23c17d56d6a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Trees">
+      <UniqueIdentifier>{fb4785a8-b04e-45d2-890f-76e25afc4aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cuckoo">
+      <UniqueIdentifier>{733dab95-7ea9-4c19-b5ea-693ee71ef234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Clockface">
+      <UniqueIdentifier>{6ea18ce6-5c1d-435e-8ab2-72b1ffa5a393}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="escapementScene.cpp">
       <Filter>Source Files\Escapement</Filter>
+    </ClCompile>
+    <ClCompile Include="trees.cpp">
+      <Filter>Source Files\Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="cuckooScene.cpp">
+      <Filter>Source Files\Cuckoo</Filter>
+    </ClCompile>
+    <ClCompile Include="clockface.cpp">
+      <Filter>Source Files\Clockface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +173,24 @@
     <None Include="trippyCogs.vert">
       <Filter>Source Files\TrippyCogs</Filter>
     </None>
+    <None Include="trees.frag">
+      <Filter>Source Files\Trees</Filter>
+    </None>
+    <None Include="trees.vert">
+      <Filter>Source Files\Trees</Filter>
+    </None>
+    <None Include="cuckoo.frag">
+      <Filter>Source Files\Cuckoo</Filter>
+    </None>
+    <None Include="cuckoo.vert">
+      <Filter>Source Files\Cuckoo</Filter>
+    </None>
+    <None Include="clockface.frag">
+      <Filter>Source Files\Clockface</Filter>
+    </None>
+    <None Include="clockface.vert">
+      <Filter>Source Files\Clockface</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderReader.h">
@@ -203,6 +239,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="trippyCogsScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="treeScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cuckooScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clockfaceScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

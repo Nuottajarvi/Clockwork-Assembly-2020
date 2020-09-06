@@ -29,5 +29,5 @@ Scene MovementScene::init() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	return { 142000., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 63., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
 }

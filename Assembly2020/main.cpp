@@ -19,6 +19,9 @@
 #include "raymarchedCogsScene.h"
 #include "trippyCogsScene.h"
 #include "movementScene.h"
+#include "cuckooScene.h"
+#include "treeScene.h"
+#include "clockfaceScene.h"
 #include "normalmap.h"
 #include "textureLoader.h"
 
@@ -68,13 +71,13 @@ int main(void)
 {
 	Window screen = test_screen;
 	//Window screen = fullscreen;
-	GLFWwindow* window = graphics::initWindow(screen, "Automata");
+	GLFWwindow* window = graphics::initWindow(screen, "Clockwork");
 
 	int sceneId = 0;
-	Scene(*scenes[])() = {/*IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init,*/ MovementScene::init};
+	Scene(*scenes[])() = {/*IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init, MovementScene::init,  Cuckoo::init, Trees::init,*/ Clockface::init };
 
 	//ShowCursor(0);
-	//PlaySound("./music.wav", NULL, SND_ASYNC);
+	//PlaySound("./media/clockwork.wav", NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window) && sceneId < sizeof(scenes) / sizeof(*(scenes))) {
 
 		Scene scene = scenes[sceneId]();
@@ -149,7 +152,7 @@ int main(void)
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			mat4x4 mvp;
-			Camera::set(mvp, time);
+			Camera::set(mvp, time, sceneId);
 			glUseProgram(program);
 			glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)mvp);
 

@@ -14,8 +14,6 @@ TextureArray Escapement::getTextures(GLuint program) {
 
 
 Scene Escapement::init() {
-	//escapement
-
 	shaderReader vertexShader = shaderReader("escapement.vert");
 	shaderReader fragmentShader = shaderReader("escapement.frag");
 

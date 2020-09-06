@@ -15,8 +15,6 @@ TextureArray Weights::getTextures(GLuint program) {
 }
 
 Scene Weights::init() {
-	//weights
-
 	shaderReader vertexShader = shaderReader("weights.vert");
 	shaderReader fragmentShader = shaderReader("weights.frag");
 

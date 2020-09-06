@@ -153,6 +153,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="clockface.cpp" />
+    <ClCompile Include="cuckooScene.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="graphicsController.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,6 +163,7 @@
     <ClCompile Include="scene1.cpp" />
     <ClCompile Include="introScene.cpp" />
     <ClCompile Include="normalmap.cpp" />
+    <ClCompile Include="trees.cpp" />
     <ClCompile Include="weightsScene.cpp" />
     <ClCompile Include="escapementScene.cpp" />
     <ClCompile Include="raymarchedCogsScene.cpp" />
@@ -173,6 +176,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="antialias-post.frag" />
+    <None Include="clockface.frag" />
+    <None Include="clockface.vert" />
+    <None Include="cuckoo.frag" />
+    <None Include="cuckoo.vert" />
     <None Include="movementScene.frag" />
     <None Include="movementScene.post.frag" />
     <None Include="movementScene.vert" />
@@ -184,6 +191,8 @@
     <None Include="intro.vert" />
     <None Include="normalmap.frag" />
     <None Include="normalmap.vert" />
+    <None Include="trees.frag" />
+    <None Include="trees.vert" />
     <None Include="weights.frag" />
     <None Include="weights.vert" />
     <None Include="escapement.frag" />
@@ -194,6 +203,8 @@
     <None Include="trippyCogs.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clockfaceScene.h" />
+    <ClInclude Include="cuckooScene.h" />
     <ClInclude Include="graphicsController.h" />
     <ClInclude Include="libraries\glfw3.h" />
     <ClInclude Include="movementScene.h" />
@@ -201,6 +212,7 @@
     <ClInclude Include="scene1.h" />
     <ClInclude Include="introScene.h" />
     <ClInclude Include="normalmap.h" />
+    <ClInclude Include="treeScene.h" />
     <ClInclude Include="weightsScene.h" />
     <ClInclude Include="escapementScene.h" />
     <ClInclude Include="raymarchedCogsScene.h" />

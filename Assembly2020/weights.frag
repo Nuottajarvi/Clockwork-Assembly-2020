@@ -58,7 +58,7 @@ float SDFlink(vec3 p, bool twist)
 }
 
 float SDFchain(vec3 p)
-{	
+{
 	float smallest = 99.;
 	for(int i = 0; i < 10; i++) {
 		bool twist = false;
@@ -150,7 +150,6 @@ vec3 bgNoise(vec2 uv) {
     float nx = noise((uv + vec2(time * .1)) * .1 + vec2(0.2, 0.1)).r;
     float ny = noise((uv + vec2(time * .1)) * .1 + vec2(0.3, 0.6)).r;
     vec2 os = vec2(nx, ny);
-    vec3 turqoise = vec3(0.8, 1.2, 1.2); 
     return noise(uv*.07 + os*.03) * .2; 
 }
 

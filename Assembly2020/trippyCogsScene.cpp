@@ -7,8 +7,6 @@
 #include "sceneHelpers.h"
 
 Scene TrippyCogs::init() {
-	//escapement
-
 	shaderReader vertexShader = shaderReader("trippyCogs.vert");
 	shaderReader fragmentShader = shaderReader("trippyCogs.frag");
 

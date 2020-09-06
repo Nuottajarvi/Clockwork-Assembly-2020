@@ -7,8 +7,6 @@
 #include "sceneHelpers.h"
 
 Scene RaymarchedCogs::init() {
-	//escapement
-
 	shaderReader vertexShader = shaderReader("raymarchedCogs.vert");
 	shaderReader fragmentShader = shaderReader("raymarchedCogs.frag");
 

@@ -40,9 +40,9 @@ float flakes(vec2 p){
 void main() {
 	vec2 uv = gl_FragCoord.xy / vec2(600.);
 	
-	float t0 = 4.8;
-	float t1 = t0 + 3.;
-	float t2 = t1 + 3.3;
+	float t0 = 5.;
+	float t1 = t0 + 2.05;
+	float t2 = t1 + 1.9;
 
 	//title
 	vec2 texUv = uv - vec2(1., 0.8);

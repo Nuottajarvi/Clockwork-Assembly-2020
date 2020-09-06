@@ -26,16 +26,15 @@ void main()
 	if(/*isPendulum*/vObjId == 1) {
 		isBg = 0;
 		vec3 os = vec3(0., -8., 5.);
-		float swing = sin(iTime - PI / 2.);
+		float swing = sin((iTime * PI * .5) - PI / 2.);
 		//swing = -PI / 2.;
-		mat3 rot = rotZ(swing);
+		mat3 rot = rotZ(swing * .75);
 		vec3 pos = rot * vPos - os;
 		gl_Position = MVP * vec4(pos, 1.0);
 	} else if(/*isBase*/vObjId == 2) {
 		isBg = 0;
-		vec3 os = vec3(0., 6., 2.);
-		vec3 pos = vPos * 8. - os;
-		pos.x *= 1.4;
+		vec3 os = vec3(0., -3., 2.);
+		vec3 pos = vPos * 4. - os;
 		hitPos = pos;
 		gl_Position = MVP * vec4(pos, 1.0);
 	} else {
