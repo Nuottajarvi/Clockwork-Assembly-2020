@@ -156,7 +156,7 @@ vec3 bgNoise(vec2 uv) {
 void main() {
     // Output to screen
 	vec3 lightDir = vec3(-4., 0., -3.);
-	vec3 eye = vec3(0., 0., -8. + pow(max(0., (time - 6.) * 3.), 2.));
+	vec3 eye = vec3(0., 0., -8. + pow(max(0., (time - 8.) * 3.), 2.));
 	vec3 ray = normalize(vec3(uv, 2.));
 
 	float y;

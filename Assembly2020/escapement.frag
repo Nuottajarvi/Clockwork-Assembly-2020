@@ -108,7 +108,6 @@ vec3 bgNoise(vec2 uv) {
     return noise(uv*.07 + os*.03) * .2 * vec3(1. - diff, 1. + diff, 1. + diff); 
 }
 
-
 void main()
 {
     // Time varying pixel color

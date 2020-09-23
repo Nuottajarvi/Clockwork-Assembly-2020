@@ -63,9 +63,9 @@ void main() {
 
 	vec2 nuv = uv - vec2(0.2 - max(0., (time - 6.5)), 0.);
 
-	nuv /= max(1., (time - 6.) * 10.);
+	nuv /= max(1., (time - 4.) * 10.);
 	
-	float beakT = mod(min(time, 6.5) * .75, 2.);
+	float beakT = mod(min(time * 1.5, 6.5) * .75, 2.);
 	if(beakT > 1.) {
 		beakT = 2. - beakT;
 	}

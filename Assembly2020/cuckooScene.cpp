@@ -24,5 +24,5 @@ Scene Cuckoo::init() {
 	IndiceArray indices;
 	SceneHelpers::createBg(vertices, indices);
 
-	return { 7., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 5., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 8 };
 }

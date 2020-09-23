@@ -42,4 +42,5 @@ void main()
 		gl_Position = vec4(vPos, 1.);
 	}
     uv = vTex;
+	uv.y = -uv.y;
 }

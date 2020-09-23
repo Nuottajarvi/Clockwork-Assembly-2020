@@ -45,13 +45,15 @@ vec3 redGreenEffect() {
 	vec3 col = vec3(0.);
 
 	float buzzR = buzz(-15.);
-	col.r += texture(fbo_tex, uv).r * buzzR;
+	float red = texture(fbo_tex, uv).r * buzzR;
+	col += vec3(red, red * 1/4, red * 1/4);
 	vec2 newUV = uv * 0.8 + vec2(0., 0.);
 
 	if(iTime > 18 && iTime < 23) {
 		float buzzG = buzz(-15. + PI);
 	
-		col.g += texture(fbo_tex, newUV).r * buzzG;
+		col.g += texture(fbo_tex, newUV).r * buzzG * .5;
+		col.b += texture(fbo_tex, newUV).r * buzzG * .5;
 	}
 	return col;
 }

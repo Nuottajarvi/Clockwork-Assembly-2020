@@ -160,6 +160,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="movementScene.cpp" />
     <ClCompile Include="objReader.cpp" />
+    <ClCompile Include="outro.cpp" />
     <ClCompile Include="scene1.cpp" />
     <ClCompile Include="introScene.cpp" />
     <ClCompile Include="normalmap.cpp" />
@@ -183,6 +184,8 @@
     <None Include="movementScene.frag" />
     <None Include="movementScene.post.frag" />
     <None Include="movementScene.vert" />
+    <None Include="outro.frag" />
+    <None Include="outro.vert" />
     <None Include="post.vert" />
     <None Include="intro.post.frag" />
     <None Include="scene1.frag" />
@@ -209,6 +212,7 @@
     <ClInclude Include="libraries\glfw3.h" />
     <ClInclude Include="movementScene.h" />
     <ClInclude Include="objReader.h" />
+    <ClInclude Include="outroScene.h" />
     <ClInclude Include="scene1.h" />
     <ClInclude Include="introScene.h" />
     <ClInclude Include="normalmap.h" />

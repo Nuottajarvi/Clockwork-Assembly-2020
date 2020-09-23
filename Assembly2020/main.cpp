@@ -22,6 +22,7 @@
 #include "cuckooScene.h"
 #include "treeScene.h"
 #include "clockfaceScene.h"
+#include "outroScene.h"
 #include "normalmap.h"
 #include "textureLoader.h"
 
@@ -69,17 +70,18 @@ void setVertexAttribArray(GLint location, int size, Scene scene, bool reset = fa
 
 int main(void)
 {
-	Window screen = test_screen;
-	//Window screen = fullscreen;
+	//Window screen = test_screen;
+	Window screen = fullscreen;
+	glfwWindowHint(GLFW_SAMPLES, 4);
 	GLFWwindow* window = graphics::initWindow(screen, "Clockwork");
 
 	int sceneId = 0;
-	Scene(*scenes[])() = {/*IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init, MovementScene::init,  Cuckoo::init, Trees::init,*/ Clockface::init };
+	Scene(*scenes[])() = {IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init, MovementScene::init, Cuckoo::init,Trees::init, Clockface::init, Outro::init };
 
-	//ShowCursor(0);
-	//PlaySound("./media/clockwork.wav", NULL, SND_ASYNC);
+	ShowCursor(0);
+	PlaySound("./media/clockwork.wav", NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window) && sceneId < sizeof(scenes) / sizeof(*(scenes))) {
-
+		glEnable(GL_MULTISAMPLE);
 		Scene scene = scenes[sceneId]();
 		sceneId++;
 

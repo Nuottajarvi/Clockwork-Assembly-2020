@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Clockface">
       <UniqueIdentifier>{6ea18ce6-5c1d-435e-8ab2-72b1ffa5a393}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Outro">
+      <UniqueIdentifier>{6602270b-8abd-4cdf-ac93-01f269568277}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="clockface.cpp">
       <Filter>Source Files\Clockface</Filter>
+    </ClCompile>
+    <ClCompile Include="outro.cpp">
+      <Filter>Source Files\Outro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +197,12 @@
     <None Include="clockface.vert">
       <Filter>Source Files\Clockface</Filter>
     </None>
+    <None Include="outro.vert">
+      <Filter>Source Files\Outro</Filter>
+    </None>
+    <None Include="outro.frag">
+      <Filter>Source Files\Outro</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderReader.h">
@@ -248,6 +260,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="clockfaceScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="outroScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

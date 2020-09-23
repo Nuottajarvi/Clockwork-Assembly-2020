@@ -63,7 +63,7 @@ vec4 SDFtree(vec3 p, float t, float seed) {
                 growth = maxGrowth;
         }
         
-        float fall = min(1., max(0., (t - fi - 1.)));
+        float fall = min(1., max(0., (t - fi - 1.5)));
         float death = min(1., max(0., (t - 6. - 2.)));
         
         if(i == 5) {
@@ -71,7 +71,7 @@ vec4 SDFtree(vec3 p, float t, float seed) {
             float distCheck = SDFball(np, growth * 1.5 - death * .1);
         	dist = min(dist, distCheck);
             if(dist == distCheck) {
-            	vec3 summerfall = mix(vec3(0., .3, 0.), vec3(.3, .1, 0.), fall);
+            	vec3 summerfall = mix(vec3(0., .3, .2), vec3(.3, .1, .1), fall);
             	col = mix(summerfall, vec3(0.), death);
             }
             
@@ -170,7 +170,7 @@ vec3 bgCogs(vec2 uv, float timeOS) {
     uv /= 3.;
 
     if(cog(uv).r > .5) {
-    	return mix(vec3(0.), vec3(0.05), min(time, 1.) - max(0, time - 39.));
+    	return mix(vec3(0.), vec3(0.05), min(time, 1.) - max(0, time - 24.));
     }
 
     return vec3(0.);
@@ -194,7 +194,7 @@ void main() {
     float light = .3 + diffuse;
     col = light * col;
     
-    if(depth == maxd || time > 38.) {
+    if(depth == maxd || time > 24.) {
     	col = bgCogs(uv, 0.);   
     }
 

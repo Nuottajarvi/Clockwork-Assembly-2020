@@ -38,14 +38,17 @@ float flakes(vec2 p){
 }
 
 void main() {
-	vec2 uv = gl_FragCoord.xy / vec2(600.);
-	
+	vec2 nuv = uv;// / vec2(600.);
 	float t0 = 5.;
 	float t1 = t0 + 2.05;
 	float t2 = t1 + 1.9;
 
+	nuv.y += 1.15;
+	nuv.x += 0.15;
+
 	//title
-	vec2 texUv = uv - vec2(1., 0.8);
+	vec2 texUv = nuv - vec2(1., 0.8);
+	texUv *= 1.5;
 
 	if(iTime < t1 && iTime > t0) {
 		texUv.y = max(texUv.y, -.3);
@@ -56,7 +59,7 @@ void main() {
 	}
 
 	//shakes
-	texUv.x += sin(texUv.y * 1000. + iTime * 100.) * .005;
+	texUv.x += sin(texUv.y * 2000. + iTime * 100.) * .005;
 
 	texUv.y *= -1.;
 	vec3 titleCol = texture(titleTex, texUv * titleAspect).rgb;
@@ -64,13 +67,13 @@ void main() {
 		titleCol = vec3(0.);
 	}
 
-	uv -= vec2(.7, .5);
+	nuv -= vec2(.7, .5);
 	if(isBg == 1) {
 		vec3 col = vec3(0.8);
 		
 		//after 12s pullup
-		vec2 fuv = uv;
-		vec2 bguv = uv;
+		vec2 fuv = nuv;
+		vec2 bguv = nuv;
 		float flaketime = 13.;
 		if(iTime > flaketime) {
 			fuv /= 1. - (iTime - flaketime) * .3;

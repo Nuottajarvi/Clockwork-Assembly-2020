@@ -29,5 +29,5 @@ Scene IntroScene::init() {
 
 	glDisable(GL_DEPTH_TEST);
 
-	return { 15.5, vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
+	return { 15.6, vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 1 };
 }
