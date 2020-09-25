@@ -48,6 +48,7 @@ vec4 SDFtree(vec3 p, float t, float seed) {
     float dist = maxd;
     vec3 np = p;
     vec3 col = vec3(0.);
+    t /= 1.3;
     for(int i = 0; i < 6; i++) {
         float fi = float(i);
         float branches = pow(2., fi);
@@ -84,7 +85,7 @@ vec4 SDFtree(vec3 p, float t, float seed) {
         }
         np.x = abs(np.x);
         np.y -= maxGrowth;
-		np = rotY(48. - sin(time) * .1 + fract(sin(seed * 43.2315))) * rotZ(-0.5 + fract(sin(seed * 43.2315)) * .2 + (fi + 1.) * .05 - death * .3) * np;
+		np = rotY(48. - sin(time / 1.3) * .1 + fract(sin(seed * 43.2315))) * rotZ(-0.5 + fract(sin(seed * 43.2315)) * .2 + (fi + 1.) * .05 - death * .3) * np;
     }
     
     return vec4(col, dist);    
@@ -92,8 +93,8 @@ vec4 SDFtree(vec3 p, float t, float seed) {
 }
 
 vec4 SDF(vec3 p) {
-    float timing = 13.;
-    p.z -= floor(time / timing) * 3.25;
+    float timing = 16.;
+    p.z -= floor(time / timing) * 4.25;
   	return SDFtree(p, mod(time, timing), floor(time / timing)); 
 }
 
@@ -138,7 +139,7 @@ mat2 rot(float a) {
 }
 
 vec3 cog(vec2 p) {
-    p = rot(sin(time)) * p;
+    p = rot(sin(time / 1.3)) * p;
     vec2 rp = vec2(atan(p.x, p.y) + PI, length(p) * 10.);
     
     //teeth circle
@@ -170,15 +171,15 @@ vec3 bgCogs(vec2 uv, float timeOS) {
     uv /= 3.;
 
     if(cog(uv).r > .5) {
-    	return mix(vec3(0.), vec3(0.05), min(time, 1.) - max(0, time - 24.));
+    	return mix(vec3(0.), vec3(0.05), min(time, 1.) - max(0, time - 30.5));
     }
 
     return vec3(0.);
 }
 
 void main() {
-    vec3 eye = vec3(sin(time * .33 + PI + 1.) * -.6 + 0.5, .45, -4. + time * .28);
-    vec3 rayDir = rotY(sin(time * .33 + PI + 1.) * -.3) * normalize(vec3(uv.x - .5, uv.y - .5, 2.));
+    vec3 eye = vec3(sin(time / 1.3 * .33 + PI + 1.) * -.6 + 0.5, .45, -4. + time * .25);
+    vec3 rayDir = rotY(sin(time / 1.3 * .33 + PI + 1.) * -.3) * normalize(vec3(uv.x - .5, uv.y - .5, 2.));
 
     vec3 color = vec3(0.);
 
@@ -194,7 +195,7 @@ void main() {
     float light = .3 + diffuse;
     col = light * col;
     
-    if(depth == maxd || time > 24.) {
+    if(depth == maxd || time > 31.) {
     	col = bgCogs(uv, 0.);   
     }
 

@@ -24,5 +24,5 @@ Scene Trees::init() {
 	IndiceArray indices;
 	SceneHelpers::createBg(vertices, indices);
 
-	return { 25., vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 8 };
+	return { 31.5, vertices, indices, vertexShader.source, fragmentShader.source, getTextures, post_vert.source, post_frag.source, 8 };
 }

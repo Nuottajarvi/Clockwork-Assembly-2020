@@ -76,7 +76,7 @@ int main(void)
 	GLFWwindow* window = graphics::initWindow(screen, "Clockwork");
 
 	int sceneId = 0;
-	Scene(*scenes[])() = {IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init, MovementScene::init, Cuckoo::init,Trees::init, Clockface::init, Outro::init };
+	Scene(*scenes[])() = {IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init, MovementScene::init, Cuckoo::init, Trees::init, Clockface::init, Outro::init };
 
 	ShowCursor(0);
 	PlaySound("./media/clockwork.wav", NULL, SND_ASYNC);

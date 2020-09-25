@@ -20,7 +20,7 @@ float Camera::smoothStep(float x) {
 }
 
 void Camera::updateM(mat4x4 &m, float time, int sceneId) {
-	if(sceneId == 1) {
+	if(sceneId ==  1) {
 		//intro scene
 		const float t0 = 10.; //starting zoom out
 		const float t1 = 15.;  //zoom in

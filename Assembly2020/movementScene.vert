@@ -56,20 +56,20 @@ void main()
     vec3 pos = vPos;
     float t = iTime * .5;
     if(vObjId == 1) {
-        pos = rotY(t * 1.5) * (pos - cog1pos.xzy) + cog1pos.xzy;
-        nor = rotY(t * 1.5) * vNor;
+        pos = rotY(t * 1.5 - 0.17) * (pos - cog1pos.xzy) + cog1pos.xzy + vec3(.055, 0., 0.);
+        nor = rotY(t * 1.5 - 0.17) * vNor;
     }
     else if(vObjId == 2) {
         pos = rotY(t / 4. + 0.01) * pos;
         nor = rotY(t / 4. + 0.01) * vNor;
     }
     else if(vObjId == 3) {
-        pos = rotY(-t) * (pos - cog3pos.xzy) + cog3pos.xzy;
-        nor = rotY(-t) * vNor;
+        pos = rotY(-t - 0.15) * (pos - cog3pos.xzy) + cog3pos.xzy;
+        nor = rotY(-t - 0.15) * vNor;
     }
     else if(vObjId == 4) {
-        pos = rotY(-t * 2.66667 / 4.) * (pos - cog4pos.xzy) + cog4pos.xzy;
-        nor = rotY(-t * 2.66667 / 4.) * vNor;
+        pos = rotY(-t * 2.66667 / 4. + 0.01) * (pos - cog4pos.xzy) + cog4pos.xzy;
+        nor = rotY(-t * 2.66667 / 4. + 0.01) * vNor;
     }
     pos = pos.xzy;
     gl_Position = MVP * vec4(pos, 1.0);
