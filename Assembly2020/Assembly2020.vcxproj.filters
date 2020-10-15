@@ -66,9 +66,6 @@
     <ClCompile Include="textureLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene1.cpp">
-      <Filter>Source Files\Scene1</Filter>
-    </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -80,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="graphicsController.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="normalmap.cpp">
-      <Filter>Source Files\Normalmapping</Filter>
     </ClCompile>
     <ClCompile Include="sceneHelpers.cpp">
       <Filter>Source Files</Filter>
@@ -122,87 +116,34 @@
     <None Include="antialias-post.frag">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="scene1.frag">
-      <Filter>Source Files\Scene1</Filter>
-    </None>
-    <None Include="scene1.vert">
-      <Filter>Source Files\Scene1</Filter>
-    </None>
-    <None Include="post.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="normalmap.frag">
-      <Filter>Source Files\Normalmapping</Filter>
-    </None>
-    <None Include="normalmap.vert">
-      <Filter>Source Files\Normalmapping</Filter>
-    </None>
-    <None Include="movementScene.frag">
-      <Filter>Source Files\MovementScene</Filter>
-    </None>
-    <None Include="movementScene.vert">
-      <Filter>Source Files\MovementScene</Filter>
-    </None>
-    <None Include="movementScene.post.frag">
-      <Filter>Source Files\MovementScene</Filter>
-    </None>
-    <None Include="intro.frag">
-      <Filter>Source Files\Intro</Filter>
-    </None>
-    <None Include="intro.vert">
-      <Filter>Source Files\Intro</Filter>
-    </None>
-    <None Include="intro.post.frag">
-      <Filter>Source Files\Intro</Filter>
-    </None>
-    <None Include="weights.frag">
-      <Filter>Source Files\Weights</Filter>
-    </None>
-    <None Include="weights.vert">
-      <Filter>Source Files\Weights</Filter>
-    </None>
-    <None Include="escapement.frag">
-      <Filter>Source Files\Escapement</Filter>
-    </None>
-    <None Include="escapement.vert">
-      <Filter>Source Files\Escapement</Filter>
-    </None>
-    <None Include="raymarchedCogs.frag">
-      <Filter>Source Files\RaymarchedCogs</Filter>
-    </None>
-    <None Include="raymarchedCogs.vert">
-      <Filter>Source Files\RaymarchedCogs</Filter>
-    </None>
-    <None Include="trippyCogs.frag">
-      <Filter>Source Files\TrippyCogs</Filter>
-    </None>
-    <None Include="trippyCogs.vert">
-      <Filter>Source Files\TrippyCogs</Filter>
-    </None>
-    <None Include="trees.frag">
-      <Filter>Source Files\Trees</Filter>
-    </None>
-    <None Include="trees.vert">
-      <Filter>Source Files\Trees</Filter>
-    </None>
-    <None Include="cuckoo.frag">
-      <Filter>Source Files\Cuckoo</Filter>
-    </None>
-    <None Include="cuckoo.vert">
-      <Filter>Source Files\Cuckoo</Filter>
-    </None>
-    <None Include="clockface.frag">
-      <Filter>Source Files\Clockface</Filter>
-    </None>
-    <None Include="clockface.vert">
-      <Filter>Source Files\Clockface</Filter>
-    </None>
-    <None Include="outro.vert">
-      <Filter>Source Files\Outro</Filter>
-    </None>
-    <None Include="outro.frag">
-      <Filter>Source Files\Outro</Filter>
-    </None>
+    <None Include="shaders\antialias-post.frag" />
+    <None Include="shaders\clockface.frag" />
+    <None Include="shaders\clockface.vert" />
+    <None Include="shaders\cuckoo.frag" />
+    <None Include="shaders\cuckoo.vert" />
+    <None Include="shaders\escapement.frag" />
+    <None Include="shaders\escapement.vert" />
+    <None Include="shaders\intro.frag" />
+    <None Include="shaders\intro.post.frag" />
+    <None Include="shaders\intro.vert" />
+    <None Include="shaders\movementScene.frag" />
+    <None Include="shaders\movementScene.post.frag" />
+    <None Include="shaders\movementScene.vert" />
+    <None Include="shaders\normalmap.frag" />
+    <None Include="shaders\normalmap.vert" />
+    <None Include="shaders\outro.frag" />
+    <None Include="shaders\outro.vert" />
+    <None Include="shaders\post.vert" />
+    <None Include="shaders\raymarchedCogs.frag" />
+    <None Include="shaders\raymarchedCogs.vert" />
+    <None Include="shaders\scene1.frag" />
+    <None Include="shaders\scene1.vert" />
+    <None Include="shaders\trees.frag" />
+    <None Include="shaders\trees.vert" />
+    <None Include="shaders\trippyCogs.frag" />
+    <None Include="shaders\trippyCogs.vert" />
+    <None Include="shaders\weights.frag" />
+    <None Include="shaders\weights.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderReader.h">
@@ -217,9 +158,6 @@
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="graphicsController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -227,9 +165,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libraries\glfw3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="normalmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sceneHelpers.h">

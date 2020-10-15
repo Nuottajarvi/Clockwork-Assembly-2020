@@ -14,11 +14,11 @@ TextureArray Cuckoo::getTextures(GLuint program) {
 }
 
 Scene Cuckoo::init() {
-	shaderReader vertexShader = shaderReader("cuckoo.vert");
-	shaderReader fragmentShader = shaderReader("cuckoo.frag");
+	shaderReader vertexShader = shaderReader("shaders/cuckoo.vert");
+	shaderReader fragmentShader = shaderReader("shaders/cuckoo.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/antialias-post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

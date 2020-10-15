@@ -7,11 +7,11 @@
 #include "sceneHelpers.h"
 
 Scene RaymarchedCogs::init() {
-	shaderReader vertexShader = shaderReader("raymarchedCogs.vert");
-	shaderReader fragmentShader = shaderReader("raymarchedCogs.frag");
+	shaderReader vertexShader = shaderReader("shaders/raymarchedCogs.vert");
+	shaderReader fragmentShader = shaderReader("shaders/raymarchedCogs.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/antialias-post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

@@ -14,11 +14,11 @@ TextureArray Trees::getTextures(GLuint program) {
 
 Scene Trees::init() {
 
-	shaderReader vertexShader = shaderReader("trees.vert");
-	shaderReader fragmentShader = shaderReader("trees.frag");
+	shaderReader vertexShader = shaderReader("shaders/trees.vert");
+	shaderReader fragmentShader = shaderReader("shaders/trees.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/antialias-post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

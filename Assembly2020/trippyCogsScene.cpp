@@ -7,11 +7,11 @@
 #include "sceneHelpers.h"
 
 Scene TrippyCogs::init() {
-	shaderReader vertexShader = shaderReader("trippyCogs.vert");
-	shaderReader fragmentShader = shaderReader("trippyCogs.frag");
+	shaderReader vertexShader = shaderReader("shaders/trippyCogs.vert");
+	shaderReader fragmentShader = shaderReader("shaders/trippyCogs.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/antialias-post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

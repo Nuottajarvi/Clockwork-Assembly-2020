@@ -46,7 +46,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
@@ -142,11 +142,14 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Peetu\Desktop\Koodaus\AutomataDemo\libraries\glfw-3.3.bin.WIN64\include;C:\Users\Peetu\Desktop\Koodaus\AutomataDemo\libraries\glad\include;SDK Path\Include</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>winmm.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Peetu\Desktop\Koodaus\AutomataDemo\libraries\glfw-3.3.bin.WIN64\lib-vc2019;SDK Path\Lib</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -161,9 +164,7 @@
     <ClCompile Include="movementScene.cpp" />
     <ClCompile Include="objReader.cpp" />
     <ClCompile Include="outro.cpp" />
-    <ClCompile Include="scene1.cpp" />
     <ClCompile Include="introScene.cpp" />
-    <ClCompile Include="normalmap.cpp" />
     <ClCompile Include="trees.cpp" />
     <ClCompile Include="weightsScene.cpp" />
     <ClCompile Include="escapementScene.cpp" />
@@ -177,33 +178,34 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="antialias-post.frag" />
-    <None Include="clockface.frag" />
-    <None Include="clockface.vert" />
-    <None Include="cuckoo.frag" />
-    <None Include="cuckoo.vert" />
-    <None Include="movementScene.frag" />
-    <None Include="movementScene.post.frag" />
-    <None Include="movementScene.vert" />
-    <None Include="outro.frag" />
-    <None Include="outro.vert" />
-    <None Include="post.vert" />
-    <None Include="intro.post.frag" />
-    <None Include="scene1.frag" />
-    <None Include="scene1.vert" />
-    <None Include="intro.frag" />
-    <None Include="intro.vert" />
-    <None Include="normalmap.frag" />
-    <None Include="normalmap.vert" />
-    <None Include="trees.frag" />
-    <None Include="trees.vert" />
-    <None Include="weights.frag" />
-    <None Include="weights.vert" />
-    <None Include="escapement.frag" />
-    <None Include="escapement.vert" />
-    <None Include="raymarchedCogs.frag" />
-    <None Include="raymarchedCogs.vert" />
-    <None Include="trippyCogs.frag" />
-    <None Include="trippyCogs.vert" />
+    <None Include="shaders\antialias-post.frag" />
+    <None Include="shaders\clockface.frag" />
+    <None Include="shaders\clockface.vert" />
+    <None Include="shaders\cuckoo.frag" />
+    <None Include="shaders\cuckoo.vert" />
+    <None Include="shaders\escapement.frag" />
+    <None Include="shaders\escapement.vert" />
+    <None Include="shaders\intro.frag" />
+    <None Include="shaders\intro.post.frag" />
+    <None Include="shaders\intro.vert" />
+    <None Include="shaders\movementScene.frag" />
+    <None Include="shaders\movementScene.post.frag" />
+    <None Include="shaders\movementScene.vert" />
+    <None Include="shaders\normalmap.frag" />
+    <None Include="shaders\normalmap.vert" />
+    <None Include="shaders\outro.frag" />
+    <None Include="shaders\outro.vert" />
+    <None Include="shaders\post.vert" />
+    <None Include="shaders\raymarchedCogs.frag" />
+    <None Include="shaders\raymarchedCogs.vert" />
+    <None Include="shaders\scene1.frag" />
+    <None Include="shaders\scene1.vert" />
+    <None Include="shaders\trees.frag" />
+    <None Include="shaders\trees.vert" />
+    <None Include="shaders\trippyCogs.frag" />
+    <None Include="shaders\trippyCogs.vert" />
+    <None Include="shaders\weights.frag" />
+    <None Include="shaders\weights.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clockfaceScene.h" />
@@ -213,9 +215,7 @@
     <ClInclude Include="movementScene.h" />
     <ClInclude Include="objReader.h" />
     <ClInclude Include="outroScene.h" />
-    <ClInclude Include="scene1.h" />
     <ClInclude Include="introScene.h" />
-    <ClInclude Include="normalmap.h" />
     <ClInclude Include="treeScene.h" />
     <ClInclude Include="weightsScene.h" />
     <ClInclude Include="escapementScene.h" />

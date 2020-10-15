@@ -14,11 +14,11 @@ TextureArray Escapement::getTextures(GLuint program) {
 
 
 Scene Escapement::init() {
-	shaderReader vertexShader = shaderReader("escapement.vert");
-	shaderReader fragmentShader = shaderReader("escapement.frag");
+	shaderReader vertexShader = shaderReader("shaders/escapement.vert");
+	shaderReader fragmentShader = shaderReader("shaders/escapement.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/antialias-post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

@@ -14,11 +14,11 @@ TextureArray Outro::getTextures(GLuint program) {
 }
 
 Scene Outro::init() {
-	shaderReader vertexShader = shaderReader("outro.vert");
-	shaderReader fragmentShader = shaderReader("outro.frag");
+	shaderReader vertexShader = shaderReader("shaders/outro.vert");
+	shaderReader fragmentShader = shaderReader("shaders/outro.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("intro.post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/intro.post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

@@ -17,11 +17,11 @@ TextureArray MovementScene::getTextures(GLuint program) {
 Scene MovementScene::init() {
 	//escapement
 
-	shaderReader vertexShader = shaderReader("movementScene.vert");
-	shaderReader fragmentShader = shaderReader("movementScene.frag");
+	shaderReader vertexShader = shaderReader("shaders/movementScene.vert");
+	shaderReader fragmentShader = shaderReader("shaders/movementScene.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("movementScene.post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/movementScene.post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

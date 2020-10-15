@@ -15,11 +15,11 @@ TextureArray Weights::getTextures(GLuint program) {
 }
 
 Scene Weights::init() {
-	shaderReader vertexShader = shaderReader("weights.vert");
-	shaderReader fragmentShader = shaderReader("weights.frag");
+	shaderReader vertexShader = shaderReader("shaders/weights.vert");
+	shaderReader fragmentShader = shaderReader("shaders/weights.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/antialias-post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

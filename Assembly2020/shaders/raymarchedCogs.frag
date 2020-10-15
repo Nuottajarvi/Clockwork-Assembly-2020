@@ -113,5 +113,11 @@ void main()
 	vec3 eye = rot * vec3(t0 * -.035, 3. - t * .2 + t0 * -.03, -6. + t0);
 	vec3 ray = rot * normalize(vec3(uv, 2.));
 	vec3 col = rayMarch(eye, ray, t0);
+    
+    if(time >= 9. && time < 10.) {
+        col *= 1 + (time - 9.);
+    } else if(time >= 10. && time < 11.) {
+        col = mix(vec3(1.), col, (time - 10.));
+    } 
 	FragColor = vec4(col, 1.0);
 }

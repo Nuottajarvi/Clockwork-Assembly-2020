@@ -26,7 +26,7 @@ float circle(vec2 p, float r)
 
 float escapement(vec2 p)
 { 
-    float t = time * 2.;
+    float t = (time + .2) * 2.;
     vec2 os = vec2(0., 0.45);
     vec2 np = p - os;
     np = rot(sin(t / PI * 5.) * .1) * np;
@@ -68,7 +68,7 @@ float pins(vec2 p, float edge0, float edge1)
 
 float escapementCog(vec2 uv)
 {
-    float t = (time - .3) * 2.06;
+    float t = (time) * 2.06;
     if(mod(t, 2.) < .5) {
     	t = floor(t / 2.) + (t - floor(t)) * 2.;
     } else if(mod(t, 2.) > .5 && mod(t, 2.) < 1.) {

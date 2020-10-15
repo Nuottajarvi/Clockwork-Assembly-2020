@@ -12,7 +12,6 @@
 #include "graphicsController.h"
 #include "camera.h"
 #include "shaderReader.h"
-#include "scene1.h"
 #include "introScene.h"
 #include "weightsScene.h"
 #include "escapementScene.h"
@@ -23,7 +22,6 @@
 #include "treeScene.h"
 #include "clockfaceScene.h"
 #include "outroScene.h"
-#include "normalmap.h"
 #include "textureLoader.h"
 
 const Window fullscreen = { 1920, 1080, true };
@@ -68,15 +66,67 @@ void setVertexAttribArray(GLint location, int size, Scene scene, bool reset = fa
 	pos += size;
 }
 
+bool readBool(char trueVal, char falseVal)
+{
+	char c = '0';
+	while (c != trueVal && c != falseVal)
+	{
+		std::cin >> c;
+		c = tolower(c);
+		if (c == trueVal)
+			return true;
+		else if (c == falseVal)
+			return false;
+		else
+			std::cout << "Write either " << trueVal << " or " << falseVal << std::endl;
+	}
+}
+
+int readInt()
+{
+	std::string input;	
+	while(true)
+	{
+		getline(std::cin, input);
+		try {
+			return std::stoi(input);
+		}
+		catch (std::invalid_argument) {
+			if(input != "")
+				std::cout << "Invalid number" << std::endl;
+		}
+	}
+}
+
+Window getWindowSettings()
+{
+	std::cout << "Do you want to play the demo Fullscreen? (y/n)" << std::endl;
+	bool fullscreen = readBool('y', 'n');
+
+	int width = 1920;
+	int height = 1080;
+	std::cout << "Default resolution is 1920x1080. Accept (a) or change (c)" << std::endl;
+	bool customResolution = readBool('c', 'a');
+	
+	if (customResolution) {
+		std::cout << "Give width in pixels:" << std::endl;
+		width = readInt();
+		std::cout << "Give height in pixels:" << std::endl;
+		height = readInt();
+	}
+
+	return { width, height, fullscreen };
+}
+
 int main(void)
 {
 	//Window screen = test_screen;
-	Window screen = fullscreen;
+	Window screen = getWindowSettings();
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	GLFWwindow* window = graphics::initWindow(screen, "Clockwork");
 
 	int sceneId = 0;
-	Scene(*scenes[])() = {IntroScene::init, Weights::init, Escapement::init, RaymarchedCogs::init, TrippyCogs::init, MovementScene::init, Cuckoo::init, Trees::init, Clockface::init, Outro::init };
+	Scene(*scenes[])() = {IntroScene::init, Weights::init,* Escapement::init, RaymarchedCogs::init, TrippyCogs::init, MovementScene::init, Cuckoo::init, Trees::init, Clockface::init, Outro::init };
 
 	ShowCursor(0);
 	PlaySound("./media/clockwork.wav", NULL, SND_ASYNC);

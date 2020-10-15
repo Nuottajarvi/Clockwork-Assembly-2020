@@ -14,11 +14,11 @@ TextureArray IntroScene::getTextures(GLuint program) {
 }
 
 Scene IntroScene::init() {
-	shaderReader vertexShader = shaderReader("intro.vert");
-	shaderReader fragmentShader = shaderReader("intro.frag");
+	shaderReader vertexShader = shaderReader("shaders/intro.vert");
+	shaderReader fragmentShader = shaderReader("shaders/intro.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("intro.post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/intro.post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;

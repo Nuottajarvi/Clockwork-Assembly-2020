@@ -15,11 +15,11 @@ TextureArray Clockface::getTextures(GLuint program) {
 
 Scene Clockface::init() {
 
-	shaderReader vertexShader = shaderReader("clockface.vert");
-	shaderReader fragmentShader = shaderReader("clockface.frag");
+	shaderReader vertexShader = shaderReader("shaders/clockface.vert");
+	shaderReader fragmentShader = shaderReader("shaders/clockface.frag");
 
-	shaderReader post_vert = shaderReader("post.vert");
-	shaderReader post_frag = shaderReader("antialias-post.frag");
+	shaderReader post_vert = shaderReader("shaders/post.vert");
+	shaderReader post_frag = shaderReader("shaders/antialias-post.frag");
 
 	VertexArray vertices;
 	IndiceArray indices;
